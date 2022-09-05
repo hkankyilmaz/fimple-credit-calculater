@@ -22,7 +22,15 @@ function Home() {
             <button> {text.home.startButton} </button>
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid
+          container
+          spacing={1}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <UserInput />
         </Grid>
       </StyledDiv>
