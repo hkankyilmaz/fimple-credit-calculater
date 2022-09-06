@@ -24,12 +24,31 @@ export const LanguageProvider = ({ children }: IChildren) => {
     home: {
       startButton: language === "turkish" ? "Hesaplamaya Başla" : "Get Started",
       principal: language === "turkish" ? "Ana Para" : "Principal",
+      principalPlaceHolder:
+        language === "turkish" ? "Ana Parayı Giriniz" : "Enter The Principal",
       numOfIns:
         language === "turkish" ? "Taksit Sayısı" : "Number Of Installment",
+      numOfInsPlaceHolder:
+        language === "turkish"
+          ? "Taksit Sayısını Seçiniz"
+          : "Choose Number Of Installment",
       profitRate: language === "turkish" ? "Kar Oranı" : "Profit Rate",
+      profitRatePlaceHolder:
+        language === "turkish" ? "Kar Oranını Giriniz" : "Enter Profit Rate",
       insInterval:
         language === "turkish" ? "Taksit Aralığı" : "Installment Interval",
+      insIntervalPlaceHolder:
+        language === "turkish"
+          ? "Taksit Aralığını Seçiniz"
+          : "Choose Installment Interval",
+      insIntervalOptOne: language === "turkish" ? "Yıllık" : "Yearly",
+      insIntervalOptTwo: language === "turkish" ? "Aylık" : "Montly",
+      insIntervalOptThree: language === "turkish" ? "Haftalık" : "Weekly",
       taxRate: language === "turkish" ? "Vergi Oranı" : "Tax Rate",
+      taxRatePlaceHolder:
+        language === "turkish"
+          ? "Vergi Oranını Seçiniz"
+          : "Choose The Tax Rate",
       calculateButton: language === "turkish" ? "Hesapla" : "Calculate",
       totalRefund:
         language === "turkish" ? "Toplam Geri Ödeme" : "Total Refund",
@@ -39,6 +58,38 @@ export const LanguageProvider = ({ children }: IChildren) => {
         language === "turkish"
           ? "Ödeme Planını Göster"
           : "Show Payment Schedule",
+      errorField: {
+        required:
+          language === "turkish" ? "Bu Alan Zorunlu" : "This field is required",
+        principal: {
+          max:
+            language === "turkish"
+              ? "En fazla 100000000000 Tl girebilirsiniz "
+              : "You can enter a maximum of 100000000000 TL",
+          min:
+            language === "turkish"
+              ? "En ez 100 tl girebilirsiniz"
+              : "You can enter at least 100 TL",
+          pattern:
+            language === "turkish"
+              ? "Bu alana sadece sayı girebilirsiniz"
+              : "This input is number only",
+        },
+        profitRate: {
+          max:
+            language === "turkish"
+              ? "En fazla %30 girebilirsiniz"
+              : "You can enter up to 30%",
+          min:
+            language === "turkish"
+              ? "En ez %1.1 girebilirsiniz"
+              : "You can enter at least 1.1%",
+          pattern:
+            language === "turkish"
+              ? "Bu alana sadece sayı girebilirsiniz"
+              : "This input is number only",
+        },
+      },
     },
     footer: {
       footerText: language === "turkish" ? " 2022 CalCredit" : "2022 CalCredit",

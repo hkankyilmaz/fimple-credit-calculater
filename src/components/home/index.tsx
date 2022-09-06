@@ -15,9 +15,12 @@ function Home() {
         <Grid container spacing={2}>
           <Grid
             container
-            item
             xs={12}
-            sx={{ display: "flex", justifyContent: "center" }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <button> {text.home.startButton} </button>
           </Grid>

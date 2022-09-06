@@ -7,6 +7,7 @@ interface IItheme {
 export const StyledDiv = styled.div<IItheme>`
   margin-top: ${(props) => props.theme.gutters.big};
   button {
+    width: 200px;
     padding: 8px 16px;
     cursor: pointer;
     border-radius: ${(props) => props.theme.radius.small};

@@ -70,6 +70,10 @@ export const theme = {
   fontFamily: {
     main: '"Open Sans", sans-serif;',
   },
+  boxShadow: {
+    light: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+    dark: "rgba(242, 242, 250, 0.2) 0px 7px 29px 0px",
+  },
 };
 
 export const Container = styled.div`
