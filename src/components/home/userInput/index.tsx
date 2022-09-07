@@ -7,7 +7,7 @@ import { StyledForm } from "./styled";
 import { useForm } from "react-hook-form";
 import { FormInputs } from "./userInput";
 import ErrorField from "./errorField";
-import { focusImput } from "../../../customHook";
+import { focusImput } from "../../../customHook/focusImput";
 
 const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
   const { text, language } = useContext(LanguageContext);
