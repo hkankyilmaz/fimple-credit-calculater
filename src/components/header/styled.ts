@@ -82,5 +82,10 @@ export const StyledDiv = styled.div<IItheme>`
           ? props.theme.colors.buttonBorderColorLight
           : props.theme.colors.buttonBorderColorDark};
     }
+    .active {
+      scale: 1.2;
+      background-color: ${(props) => props.theme.colors.green};
+      border: 2px solid ${(props) => props.theme.colors.white};
+    }
   }
 `;

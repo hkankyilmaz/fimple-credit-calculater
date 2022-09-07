@@ -2,10 +2,14 @@ import styled from "styled-components";
 
 interface IItheme {
   Itheme: string;
+  language: string;
 }
 
 export const StyledForm = styled.form<IItheme>`
-  background-color: #f2f2f2;
+  background-color: ${(props) =>
+    props.Itheme === "light"
+      ? props.theme.colors.darkWhite
+      : props.theme.colors.softBlue};
   border-radius: ${(props) => props.theme.radius.small};
   padding: ${(props) => props.theme.gutters.big};
   margin-bottom: ${(props) => props.theme.gutters.big};
@@ -14,16 +18,20 @@ export const StyledForm = styled.form<IItheme>`
       ? props.theme.boxShadow.light
       : props.theme.boxShadow.dark};
   margin-top: ${(props) => props.theme.gutters.largest};
+  transition: background-color 0.3s ease;
 
   p {
     font-weight: ${(props) => props.theme.fontWeights.medium};
-    color: #737373;
+    color: ${(props) =>
+      props.Itheme === "light"
+        ? props.theme.colors.darkestWhite
+        : props.theme.colors.white};
     font-weight: bold;
   }
 
   span {
     float: right;
-    margin-right: 50%;
+    margin-right: ${(props) => (props.language === "turkish" ? "50%" : "25%")};
     font-weight: bold;
   }
 

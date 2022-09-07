@@ -11,10 +11,7 @@ export const StyledDiv = styled.div<IItheme>`
     padding: 8px 16px;
     cursor: pointer;
     border-radius: ${(props) => props.theme.radius.small};
-    border: ${(props) =>
-      props.Itheme === "light"
-        ? `none`
-        : `1px solid ${props.theme.colors.white}`};
+    border: none;
     background-color: ${(props) =>
       props.Itheme === "light"
         ? props.theme.colors.black
@@ -22,12 +19,12 @@ export const StyledDiv = styled.div<IItheme>`
     color: ${(props) =>
       props.Itheme === "light"
         ? props.theme.colors.white
-        : props.theme.colors.green};
+        : props.theme.colors.white};
     :hover {
       background-color: ${(props) =>
         props.Itheme === "light"
           ? props.theme.colors.green
-          : props.theme.colors.green};
+          : props.theme.colors.darkGreen};
     }
   }
 `;

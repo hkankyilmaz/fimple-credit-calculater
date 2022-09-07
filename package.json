@@ -17,6 +17,7 @@
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "animate.css": "^4.1.1",
+    "jquery": "^3.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.34.2",
@@ -51,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "@types/styled-components": "^5.1.26"
   }
 }

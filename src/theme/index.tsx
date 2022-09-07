@@ -10,18 +10,23 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     overflow-x: hidden;
-    background-color: #fafafa;
-  }
+    background-color: #f2f2f2;
+    transition:background-color 0.3s ease ;
+ }
   
 `;
 
 export const theme = {
   colors: {
     white: "#fff",
+    darkWhite: "#f2f2f2",
+    darkestWhite: "#737373",
     black: "#000",
     gray: "#C4C4C4",
     green: "#09D3AC",
-    blue: "#48556a",
+    darkGreen: "#069377",
+    softBlue: "#96a1b6",
+    blue: "#a4b0c1",
     lightGray: "#E5E5E5",
     textColorLight: "#000",
     textColorDark: "#fff",
@@ -61,6 +66,7 @@ export const theme = {
     big: "30px",
     large: "40px",
     largest: "50px",
+    largestBig: "63px",
     xlargest: "70px",
   },
   radius: {
@@ -75,43 +81,3 @@ export const theme = {
     dark: "rgba(242, 242, 250, 0.2) 0px 7px 29px 0px",
   },
 };
-
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media (min-width: 576px) {
-    max-width: 576px;
-  }
-  @media (min-width: 768px) {
-    max-width: 768px;
-  }
-  @media (min-width: 992px) {
-    max-width: 992px;
-  }
-  @media (min-width: 1200px) {
-    max-width: 1150px;
-  }
-  @media (min-width: 1400px) {
-    max-width: 1400px;
-  }
-`;
-
-export const SpinnerWrapper = styled.div`
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 100vw;
-  min-height: 100vh;
-  z-index: 1000;
-`;

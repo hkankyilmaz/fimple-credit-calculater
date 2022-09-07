@@ -5,7 +5,8 @@ const LanguageContext = createContext({} as IContextProps);
 
 export const LanguageProvider = ({ children }: IChildren) => {
   const [language, setLanguage] = useState("turkish");
-  const [text, setText] = useState({
+  const text = {
+    language: language,
     header: {
       themeButtonOne: language === "turkish" ? "Açık" : "Light",
       themeButtonTwo: language === "turkish" ? "Koyu" : "Dark",
@@ -94,7 +95,7 @@ export const LanguageProvider = ({ children }: IChildren) => {
     footer: {
       footerText: language === "turkish" ? " 2022 CalCredit" : "2022 CalCredit",
     },
-  });
+  };
 
   const value = {
     language,

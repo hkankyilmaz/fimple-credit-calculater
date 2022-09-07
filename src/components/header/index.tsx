@@ -5,22 +5,53 @@ import { StyledDiv } from "./styled";
 import LanguageContext from "../../store/languageContext";
 import IThemeContext from "../../store/themeContext";
 import Container from "@mui/material/Container";
+import { handleTheme } from "../../customHook/changeTheme";
+import { handleLanguage } from "../../customHook/changeLanguage";
 
 function Header() {
   const { text } = useContext(LanguageContext);
-  const { Itheme } = useContext(IThemeContext);
+  const { language, setLanguage } = useContext(LanguageContext);
+  const { Itheme, setITheme } = useContext(IThemeContext);
+
+  const handleClickTheme = (className: string) => {
+    handleTheme(className, Itheme, setITheme);
+  };
+
+  const handleClickLanguage = (className: string) => {
+    handleLanguage(className, language, setLanguage);
+  };
 
   return (
     <Container maxWidth="md">
       <StyledDiv Itheme={Itheme}>
         <div className="button-container">
           <div className="theme">
-            <button className="light-btn">{text.header.themeButtonOne}</button>
-            <button className="dark-btn"> {text.header.themeButtonTwo} </button>
+            <button
+              onClick={() => handleClickTheme("light-btn")}
+              className="light-btn"
+            >
+              {text.header.themeButtonOne}
+            </button>
+            <button
+              onClick={() => handleClickTheme("dark-btn")}
+              className="dark-btn"
+            >
+              {text.header.themeButtonTwo}
+            </button>
           </div>
           <div className="lang">
-            <button className="tr-btn"> {text.header.langButtonOne} </button>
-            <button className="eng-btn"> {text.header.langButtonTwo} </button>
+            <button
+              onClick={() => handleClickLanguage("tr-btn")}
+              className="tr-btn"
+            >
+              {text.header.langButtonOne}
+            </button>
+            <button
+              onClick={() => handleClickLanguage("eng-btn")}
+              className="eng-btn"
+            >
+              {text.header.langButtonTwo}
+            </button>
           </div>
         </div>
         <h1 className="animate__animated animate__fadeInUp">

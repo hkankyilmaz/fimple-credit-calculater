@@ -10,7 +10,7 @@ import ErrorField from "./errorField";
 import { focusImput } from "../../../customHook";
 
 const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
-  const { text } = useContext(LanguageContext);
+  const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
 
   const {
@@ -30,7 +30,11 @@ const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
 
   return (
     <>
-      <StyledForm Itheme={Itheme} onSubmit={handleSubmit(onSubmit)}>
+      <StyledForm
+        language={language}
+        Itheme={Itheme}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Grid
           container
           style={{

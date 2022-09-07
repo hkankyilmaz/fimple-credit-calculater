@@ -1,5 +1,6 @@
 export interface IContextProps {
   language: string;
+  setLanguage: React.Dispatch<React.SetStateAction<string>>;
   text: T;
 }
 
