@@ -35,15 +35,18 @@ export const StyledForm = styled.form<IItheme>`
     appearance: none;
     outline: 0;
     box-shadow: none;
-    border: 0 !important;
+    border: 0;
     background: ${(props) => props.theme.colors.white};
     background-image: none;
     flex: 1;
     padding: 0 0.5em;
     color: #8c8c8c;
     cursor: pointer;
-
     font-family: "Open Sans", sans-serif;
+  }
+  select:focus,
+  input:focus {
+    border: 2px solid ${(props) => props.theme.colors.green};
   }
   input {
     cursor: default;

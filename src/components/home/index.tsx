@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import LanguageContext from "../../store/languageContext";
@@ -9,6 +9,13 @@ import UserInput from "./userInput";
 function Home() {
   const { text } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
+  const inputRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = () => {
+    const input = inputRef.current?.lastChild as HTMLElement;
+    input !== null && input.focus();
+  };
+
   return (
     <Container maxWidth="md">
       <StyledDiv Itheme={Itheme}>
@@ -22,7 +29,7 @@ function Home() {
               alignItems: "center",
             }}
           >
-            <button> {text.home.startButton} </button>
+            <button onClick={handleClick}> {text.home.startButton} </button>
           </Grid>
         </Grid>
         <Grid
@@ -34,7 +41,7 @@ function Home() {
             alignItems: "center",
           }}
         >
-          <UserInput />
+          <UserInput ref={inputRef} />
         </Grid>
       </StyledDiv>
     </Container>

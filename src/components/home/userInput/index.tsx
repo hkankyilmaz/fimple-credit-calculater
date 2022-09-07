@@ -6,23 +6,27 @@ import Grid from "@mui/material/Grid";
 import { StyledForm } from "./styled";
 import { useForm } from "react-hook-form";
 import { FormInputs } from "./userInput";
-
 import ErrorField from "./errorField";
+import { focusImput } from "../../../customHook";
 
-function UserInput() {
+const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
   const { text } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
 
   const {
     register,
+    watch,
+    getValues,
+    setFocus,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({ criteriaMode: "all" });
   const onSubmit = (data: FormInputs) => console.log(data, errors);
+  const watchFields = watch(["numOfIns", "insInterval", "taxRate"]);
 
   useEffect(() => {
-    console.log(errors);
-  });
+    focusImput(getValues(), setFocus);
+  }, [watchFields]);
 
   return (
     <>
@@ -42,18 +46,19 @@ function UserInput() {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input">
+            <div className="input" ref={inputRef}>
               <input
+                autoComplete="off"
                 placeholder={text.home.principalPlaceHolder}
                 {...register("principal", {
                   required: text.home.errorField.required,
                   max: {
                     value: 100000000000,
-                    message: text.home.errorField.profitRate.max,
+                    message: text.home.errorField.principal.max,
                   },
                   min: {
                     value: 100,
-                    message: text.home.errorField.profitRate.min,
+                    message: text.home.errorField.principal.min,
                   },
                   pattern: {
                     value: /\d+/,
@@ -65,6 +70,37 @@ function UserInput() {
           </Grid>
           <Grid container item xs={12}>
             <ErrorField message={errors?.principal?.message || null} />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <p>
+              {text.home.profitRate} <span>:</span>
+            </p>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <div className="input">
+              <input
+                autoComplete="off"
+                placeholder={text.home.profitRatePlaceHolder}
+                {...register("profitRate", {
+                  required: text.home.errorField.required,
+                  max: {
+                    value: 30,
+                    message: text.home.errorField.profitRate.max,
+                  },
+                  min: {
+                    value: 1.1,
+                    message: text.home.errorField.profitRate.min,
+                  },
+                  pattern: {
+                    value: /\d+/,
+                    message: text.home.errorField.profitRate.pattern,
+                  },
+                })}
+              />
+            </div>
+          </Grid>
+          <Grid container item xs={12}>
+            <ErrorField message={errors?.profitRate?.message || null} />
           </Grid>
           <Grid item xs={12} md={4}>
             <p>
@@ -90,36 +126,7 @@ function UserInput() {
           <Grid container item xs={12}>
             <ErrorField message={errors?.numOfIns?.message || null} />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <p>
-              {text.home.profitRate} <span>:</span>
-            </p>
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <div className="input">
-              <input
-                placeholder={text.home.profitRatePlaceHolder}
-                {...register("profitRate", {
-                  required: text.home.errorField.required,
-                  max: {
-                    value: 30,
-                    message: text.home.errorField.profitRate.max,
-                  },
-                  min: {
-                    value: 1.1,
-                    message: text.home.errorField.profitRate.min,
-                  },
-                  pattern: {
-                    value: /\d+/,
-                    message: text.home.errorField.profitRate.pattern,
-                  },
-                })}
-              />
-            </div>
-          </Grid>
-          <Grid container item xs={12}>
-            <ErrorField message={errors?.profitRate?.message || null} />
-          </Grid>
+
           <Grid item xs={12} md={4}>
             <p>
               {text.home.insInterval} <span>:</span>
@@ -174,6 +181,6 @@ function UserInput() {
       </StyledForm>
     </>
   );
-}
+});
 
 export default UserInput;
