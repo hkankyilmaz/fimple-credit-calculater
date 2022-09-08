@@ -35,9 +35,10 @@ export const StyledDiv = styled.div<IItheme>`
     justify-content: center;
     align-items: center;
     position: fixed;
-    background-color: ${(props) => props.theme.colors.black};
+    background-color: #5d6b89;
     padding: 20px;
     top: 0;
+    z-index: 999;
 
     .theme {
       margin-right: ${(props) => props.theme.gutters.large};

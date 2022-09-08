@@ -22,7 +22,7 @@ const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
     formState: { errors },
   } = useForm<FormInputs>({ criteriaMode: "all" });
   const onSubmit = (data: FormInputs) => console.log(data, errors);
-  const watchFields = watch(["numOfIns", "insInterval", "taxRate"]);
+  const watchFields = watch(["numOfIns", "insInterval"]);
 
   useEffect(() => {
     focusImput(getValues(), setFocus);
@@ -108,6 +108,68 @@ const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
           </Grid>
           <Grid item xs={12} md={4}>
             <p>
+              {text.home.taxRateBSMV} <span>:</span>
+            </p>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <div className="input">
+              <input
+                autoComplete="off"
+                placeholder={text.home.taxRateBSMVPlaceHolder}
+                {...register("taxeRateBSMV", {
+                  required: text.home.errorField.required,
+                  max: {
+                    value: 30,
+                    message: text.home.errorField.taxRateBSMV.max,
+                  },
+                  min: {
+                    value: 1.1,
+                    message: text.home.errorField.taxRateBSMV.min,
+                  },
+                  pattern: {
+                    value: /\d+/,
+                    message: text.home.errorField.taxRateBSMV.pattern,
+                  },
+                })}
+              ></input>
+            </div>
+          </Grid>
+          <Grid item container xs={12}>
+            <ErrorField message={errors?.taxeRateBSMV?.message || null} />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <p>
+              {text.home.taxRateKKDF} <span>:</span>
+            </p>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <div className="input">
+              <input
+                autoComplete="off"
+                placeholder={text.home.taxRateKKDFPlaceHolder}
+                {...register("taxeRateKKDF", {
+                  required: text.home.errorField.required,
+                  max: {
+                    value: 30,
+                    message: text.home.errorField.taxeRateKKDF.max,
+                  },
+                  min: {
+                    value: 1.1,
+                    message: text.home.errorField.taxeRateKKDF.min,
+                  },
+                  pattern: {
+                    value: /\d+/,
+                    message: text.home.errorField.taxeRateKKDF.pattern,
+                  },
+                })}
+              ></input>
+            </div>
+          </Grid>
+          <Grid item container xs={12}>
+            <ErrorField message={errors?.taxeRateKKDF?.message || null} />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <p>
               {text.home.numOfIns} <span>:</span>
             </p>
           </Grid>
@@ -158,27 +220,6 @@ const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
           </Grid>
           <Grid item container xs={12}>
             <ErrorField message={errors?.insInterval?.message || null} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <p>
-              {text.home.taxRate} <span>:</span>
-            </p>
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <div className="select">
-              <select
-                {...register("taxRate", {
-                  required: text.home.errorField.required,
-                })}
-              >
-                <option value=""> {text.home.taxRatePlaceHolder} </option>
-                <option value="BSMV">BSMV</option>
-                <option value="KKDF">KKDF</option>
-              </select>
-            </div>
-          </Grid>
-          <Grid item container xs={12}>
-            <ErrorField message={errors?.taxRate?.message || null} />
           </Grid>
         </Grid>
         <button type="submit">{text.home.calculateButton}</button>

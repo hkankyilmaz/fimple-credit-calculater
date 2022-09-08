@@ -14,7 +14,7 @@ export const StyledDiv = styled.div<IItheme>`
     border: none;
     background-color: ${(props) =>
       props.Itheme === "light"
-        ? props.theme.colors.black
+        ? props.theme.colors.softBlue
         : props.theme.colors.green};
     color: ${(props) =>
       props.Itheme === "light"

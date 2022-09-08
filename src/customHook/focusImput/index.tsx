@@ -5,12 +5,12 @@ export const focusImput = (obj: any, func: any): void => {
 
   arr.map((item, idx) => {
     item[1] !== "" &&
-      1 < idx &&
-      idx < 4 &&
+      3 < idx &&
+      idx < 5 &&
       arr[idx + 1][1] === "" &&
       func(arr[idx + 1][0]);
 
-    if (item[1] !== "" && idx === 4) {
+    if (item[1] !== "" && idx === 5) {
       const arrr = arr.filter((value) => {
         return value[1] === "";
       });

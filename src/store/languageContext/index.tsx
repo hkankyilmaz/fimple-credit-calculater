@@ -28,28 +28,35 @@ export const LanguageProvider = ({ children }: IChildren) => {
       principalPlaceHolder:
         language === "turkish" ? "Ana Parayı Giriniz" : "Enter The Principal",
       numOfIns:
-        language === "turkish" ? "Taksit Sayısı" : "Number Of Installment",
+        language === "turkish" ? "Taksit Sayısı" : "Number Of Instalment",
       numOfInsPlaceHolder:
         language === "turkish"
           ? "Taksit Sayısını Seçiniz"
-          : "Choose Number Of Installment",
+          : "Choose Number Of Instalment",
       profitRate: language === "turkish" ? "Kar Oranı" : "Profit Rate",
       profitRatePlaceHolder:
         language === "turkish" ? "Kar Oranını Giriniz" : "Enter Profit Rate",
+      taxRateBSMV:
+        language === "turkish" ? "BSMV Vergi Oranı" : "Tax Rate of BSMV",
+      taxRateBSMVPlaceHolder:
+        language === "turkish"
+          ? "BSMV Vergi Oranını Giriniz"
+          : "Enter The Tax Rate of BSMV",
+      taxRateKKDF:
+        language === "turkish" ? "KKDF Vergi Oranı" : "Tax Rate of KKDF",
+      taxRateKKDFPlaceHolder:
+        language === "turkish"
+          ? "KKDF Vergi Oranını Giriniz"
+          : "Enter The Tax Rate of KKDF",
       insInterval:
-        language === "turkish" ? "Taksit Aralığı" : "Installment Interval",
+        language === "turkish" ? "Taksit Aralığı" : "Instalment Interval",
       insIntervalPlaceHolder:
         language === "turkish"
           ? "Taksit Aralığını Seçiniz"
-          : "Choose Installment Interval",
+          : "Choose Instalment Interval",
       insIntervalOptOne: language === "turkish" ? "Yıllık" : "Yearly",
       insIntervalOptTwo: language === "turkish" ? "Aylık" : "Montly",
       insIntervalOptThree: language === "turkish" ? "Haftalık" : "Weekly",
-      taxRate: language === "turkish" ? "Vergi Oranı" : "Tax Rate",
-      taxRatePlaceHolder:
-        language === "turkish"
-          ? "Vergi Oranını Seçiniz"
-          : "Choose The Tax Rate",
       calculateButton: language === "turkish" ? "Hesapla" : "Calculate",
       totalRefund:
         language === "turkish" ? "Toplam Geri Ödeme" : "Total Refund",
@@ -77,6 +84,34 @@ export const LanguageProvider = ({ children }: IChildren) => {
               : "This input is number only",
         },
         profitRate: {
+          max:
+            language === "turkish"
+              ? "En fazla %30 girebilirsiniz"
+              : "You can enter up to 30%",
+          min:
+            language === "turkish"
+              ? "En ez %1.1 girebilirsiniz"
+              : "You can enter at least 1.1%",
+          pattern:
+            language === "turkish"
+              ? "Bu alana sadece sayı girebilirsiniz"
+              : "This input is number only",
+        },
+        taxRateBSMV: {
+          max:
+            language === "turkish"
+              ? "En fazla %30 girebilirsiniz"
+              : "You can enter up to 30%",
+          min:
+            language === "turkish"
+              ? "En ez %1.1 girebilirsiniz"
+              : "You can enter at least 1.1%",
+          pattern:
+            language === "turkish"
+              ? "Bu alana sadece sayı girebilirsiniz"
+              : "This input is number only",
+        },
+        taxeRateKKDF: {
           max:
             language === "turkish"
               ? "En fazla %30 girebilirsiniz"

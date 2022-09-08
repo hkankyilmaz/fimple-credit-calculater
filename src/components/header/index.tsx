@@ -28,7 +28,7 @@ function Header() {
           <div className="theme">
             <button
               onClick={() => handleClickTheme("light-btn")}
-              className="light-btn"
+              className="light-btn active"
             >
               {text.header.themeButtonOne}
             </button>
@@ -42,7 +42,7 @@ function Header() {
           <div className="lang">
             <button
               onClick={() => handleClickLanguage("tr-btn")}
-              className="tr-btn"
+              className="tr-btn active"
             >
               {text.header.langButtonOne}
             </button>

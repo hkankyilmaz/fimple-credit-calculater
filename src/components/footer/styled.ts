@@ -6,7 +6,7 @@ export const StyledDiv = styled.div`
   justify-content: center;
   width: 100%;
   height: 5vh;
-  background-color: ${(props) => props.theme.colors.black};
+  background-color: #5d6b89;
   margin-top: ${(props) => props.theme.gutters.largestBig};
 `;
 

@@ -25,7 +25,7 @@ export const theme = {
     gray: "#C4C4C4",
     green: "#09D3AC",
     darkGreen: "#069377",
-    softBlue: "#96a1b6",
+    softBlue: "#5d6b89",
     blue: "#a4b0c1",
     lightGray: "#E5E5E5",
     textColorLight: "#000",

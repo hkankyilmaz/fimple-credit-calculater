@@ -31,7 +31,7 @@ export const StyledForm = styled.form<IItheme>`
 
   span {
     float: right;
-    margin-right: ${(props) => (props.language === "turkish" ? "50%" : "25%")};
+    margin-right: ${(props) => (props.language === "turkish" ? "35%" : "25%")};
     font-weight: bold;
   }
 
