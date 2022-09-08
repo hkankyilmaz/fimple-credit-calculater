@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 interface IItheme {
   Itheme: string;
@@ -8,6 +8,7 @@ export const StyledDiv = styled.div<IItheme>`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   align-items: center;
   margin-top: ${(props) => props.theme.gutters.xlargest};
   h1 {
@@ -29,19 +30,42 @@ export const StyledDiv = styled.div<IItheme>`
     color: ${(props) => props.theme.colors.green};
   }
 
+  h2 {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    font-size: 30px;
+    color: white;
+    z-index: 999;
+    right: 250px;
+
+    a {
+      text-decoration: none;
+      color: white;
+      :hover {
+        color: ${(props) => props.theme.colors.green};
+      }
+    }
+  }
+
   .button-container {
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
-    background-color: #5d6b89;
+    background-color: ${(props) =>
+      props.Itheme === "light" ? "#5d6b89" : "#3e475b"};
     padding: 20px;
     top: 0;
-    z-index: 999;
+    z-index: 11;
+    transition: background-color 1s ease;
+    .btn-s {
+      display: flex;
+    }
 
     .theme {
-      margin-right: ${(props) => props.theme.gutters.large};
+      margin-right: ${(props) => props.theme.gutters.regular};
     }
 
     .light-btn,
@@ -58,16 +82,14 @@ export const StyledDiv = styled.div<IItheme>`
 
     button {
       display: inline-flex;
+      position: relative;
+      left: 230px;
       justify-content: center;
       width: 50px;
       border-style: solid;
       padding: 5px 20px;
       cursor: pointer;
       font-weight: ${(props) => props.theme.fontWeights.medium};
-      :hover {
-        background-color: ${(props) => props.theme.colors.green};
-        border-color: ${(props) => props.theme.colors.white};
-      }
 
       /*if you wanna change to buttons and butons container's css for theming you will able to do */
       background-color: ${(props) =>
@@ -82,11 +104,29 @@ export const StyledDiv = styled.div<IItheme>`
         props.Itheme === "light"
           ? props.theme.colors.buttonBorderColorLight
           : props.theme.colors.buttonBorderColorDark};
+
+      :hover {
+        background-color: ${(props) => props.theme.colors.green};
+        border-color: ${(props) => props.theme.colors.white};
+      }
     }
     .active {
       scale: 1.2;
       background-color: ${(props) => props.theme.colors.green};
       border: 2px solid ${(props) => props.theme.colors.white};
+      z-index: 995;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .button-container {
+      justify-content: space-between;
+      h2 {
+        right: -30px;
+      }
+      button {
+        left: -30px;
+      }
     }
   }
 `;

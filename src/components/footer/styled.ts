@@ -1,13 +1,19 @@
 import styled from "styled-components";
 
-export const StyledDiv = styled.div`
+interface IProps {
+  Itheme: string;
+}
+
+export const StyledDiv = styled.div<IProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 5vh;
-  background-color: #5d6b89;
+  background-color: ${(props) =>
+    props.Itheme === "light" ? "#5d6b89" : "#3E475B"};
   margin-top: ${(props) => props.theme.gutters.largestBig};
+  transition: background-color 1s ease;
 `;
 
 export const StyledP = styled.p`

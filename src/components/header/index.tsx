@@ -25,33 +25,38 @@ function Header() {
     <Container maxWidth="md">
       <StyledDiv Itheme={Itheme}>
         <div className="button-container">
-          <div className="theme">
-            <button
-              onClick={() => handleClickTheme("light-btn")}
-              className="light-btn active"
-            >
-              {text.header.themeButtonOne}
-            </button>
-            <button
-              onClick={() => handleClickTheme("dark-btn")}
-              className="dark-btn"
-            >
-              {text.header.themeButtonTwo}
-            </button>
-          </div>
-          <div className="lang">
-            <button
-              onClick={() => handleClickLanguage("tr-btn")}
-              className="tr-btn active"
-            >
-              {text.header.langButtonOne}
-            </button>
-            <button
-              onClick={() => handleClickLanguage("eng-btn")}
-              className="eng-btn"
-            >
-              {text.header.langButtonTwo}
-            </button>
+          <h2>
+            <a href="/">CreditCal</a>
+          </h2>
+          <div className="btn-s">
+            <div className="theme">
+              <button
+                onClick={() => handleClickTheme("light-btn")}
+                className="light-btn active"
+              >
+                {text.header.themeButtonOne}
+              </button>
+              <button
+                onClick={() => handleClickTheme("dark-btn")}
+                className="dark-btn"
+              >
+                {text.header.themeButtonTwo}
+              </button>
+            </div>
+            <div className="lang">
+              <button
+                onClick={() => handleClickLanguage("tr-btn")}
+                className="tr-btn active"
+              >
+                {text.header.langButtonOne}
+              </button>
+              <button
+                onClick={() => handleClickLanguage("eng-btn")}
+                className="eng-btn"
+              >
+                {text.header.langButtonTwo}
+              </button>
+            </div>
           </div>
         </div>
         <h1 className="animate__animated animate__fadeInUp">

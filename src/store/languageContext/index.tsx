@@ -62,10 +62,21 @@ export const LanguageProvider = ({ children }: IChildren) => {
         language === "turkish" ? "Toplam Geri Ödeme" : "Total Refund",
       montlyIns: language === "turkish" ? "Aylık Taksit" : "Montly Installment",
       totalTax: language === "turkish" ? "Toplam Vergi" : "Total Tax",
-      showButton:
-        language === "turkish"
-          ? "Ödeme Planını Göster"
-          : "Show Payment Schedule",
+
+      resultScreen: {
+        completedText:
+          language === "turkish"
+            ? "Hesaplamanız Tamamlandı"
+            : "Your Calculate is Completed",
+        completeBtn:
+          language === "turkish"
+            ? "Yeni Kredi Hesapla"
+            : "Calculate new Credit",
+        showButton:
+          language === "turkish"
+            ? "Ödeme Planını Göster"
+            : "Show Payment Schedule",
+      },
       errorField: {
         required:
           language === "turkish" ? "Bu Alan Zorunlu" : "This field is required",

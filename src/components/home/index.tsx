@@ -5,44 +5,43 @@ import LanguageContext from "../../store/languageContext";
 import { StyledDiv } from "./styled";
 import IThemeContext from "../../store/themeContext";
 import UserInput from "./userInput";
+import { handleScroll } from "../../customHook/handleScroll";
+import Result from "./userInput/Result";
 
 function Home() {
   const { text } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
   const inputRef = useRef<HTMLDivElement>(null);
+  const inputForm = useRef<HTMLDivElement>(null);
+
+  const gridCss = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
 
   const handleClick = () => {
     const input = inputRef.current?.lastChild as HTMLElement;
     input !== null && input.focus();
+
+    handleScroll(inputForm);
   };
 
   return (
-    <Container maxWidth="md">
+    <Container ref={inputForm} maxWidth="md">
       <StyledDiv Itheme={Itheme}>
         <Grid container spacing={2}>
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Grid container sx={gridCss}>
             <button onClick={handleClick}> {text.home.startButton} </button>
           </Grid>
         </Grid>
-        <Grid
-          container
-          spacing={1}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Grid container spacing={1} style={gridCss}>
           <UserInput ref={inputRef} />
         </Grid>
       </StyledDiv>
+      <Grid container spacing={1} style={gridCss}>
+        <Result />
+      </Grid>
     </Container>
   );
 }
