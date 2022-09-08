@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useImperativeHandle } from "react";
 import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import LanguageContext from "../../../../store/languageContext";
 import IThemeContext from "../../../../store/themeContext";
 import { StyledDiv, StyledH1 } from "./styled";
+import IinfoContext from "../../../../store/inputInfoContext";
 
 const gridCss = {
   display: "flex",
@@ -15,10 +17,11 @@ const gridCss = {
 const Result = () => {
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
-  console.log(Itheme);
+  const { info } = useContext(IinfoContext);
+
   return (
-    <div className="result-container" style={{ display: "none" }}>
-      <StyledH1 className="animate__animated animate__fadeInUp">
+    <>
+      <StyledH1 Itheme={Itheme} className="animate__animated animate__fadeInUp">
         <CreditScoreIcon
           style={{ marginRight: "20px", fontSize: "50px", color: "#09D3AC" }}
         />
@@ -32,49 +35,43 @@ const Result = () => {
             </h4>
             <div>
               <p className="frs-txt">
-                {" "}
                 {text.home.principal} <span>:</span>
               </p>
-              <p className="sc-txt"></p>
+              <p className="sc-txt">{info.principal} TL</p>
             </div>
             <div>
               <p className="frs-txt">
-                {" "}
                 {text.home.profitRate}
-                <span>:</span>{" "}
+                <span>:</span>
               </p>
-              <p className="sc-txt"></p>
+              <p className="sc-txt">%{info.profitRate}</p>
             </div>
             <div>
               <p className="frs-txt">
-                {" "}
                 {text.home.taxRateBSMV}
-                <span>:</span>{" "}
+                <span>:</span>
               </p>
-              <p className="sc-txt"></p>
+              <p className="sc-txt">%{info.taxRateBSMV}</p>
             </div>
             <div>
               <p className="frs-txt">
-                {" "}
                 {text.home.taxRateKKDF}
-                <span>:</span>{" "}
+                <span>:</span>
               </p>
-              <p className="sc-txt"></p>
+              <p className="sc-txt">%{info.taxRateKKDF}</p>
             </div>
             <div>
               <p className="frs-txt">
-                {" "}
                 {text.home.numOfIns} <span>:</span>
               </p>
-              <p className="sc-txt"></p>
+              <p className="sc-txt">{info.numberOfIns}</p>
             </div>
             <div>
               <p className="frs-txt">
-                {" "}
                 {text.home.insInterval}
-                <span>:</span>{" "}
+                <span>:</span>
               </p>
-              <p className="sc-txt"></p>
+              <p className="sc-txt">{info.insInterval}</p>
             </div>
           </Grid>
           <Grid sx={gridCss} container item xs={12} md={6}>
@@ -109,7 +106,7 @@ const Result = () => {
           <button> {text.home.resultScreen.showButton} </button>
         </div>
       </StyledDiv>
-    </div>
+    </>
   );
 };
 

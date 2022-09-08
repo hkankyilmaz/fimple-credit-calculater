@@ -6,12 +6,11 @@ import { StyledDiv } from "./styled";
 import IThemeContext from "../../store/themeContext";
 import UserInput from "./userInput";
 import { handleScroll } from "../../customHook/handleScroll";
-import Result from "./userInput/Result";
 
 function Home() {
   const { text } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<any>(null);
   const inputForm = useRef<HTMLDivElement>(null);
 
   const gridCss = {
@@ -21,8 +20,7 @@ function Home() {
   };
 
   const handleClick = () => {
-    const input = inputRef.current?.lastChild as HTMLElement;
-    input !== null && input.focus();
+    inputRef.current.focusInput();
 
     handleScroll(inputForm);
   };
@@ -39,9 +37,6 @@ function Home() {
           <UserInput ref={inputRef} />
         </Grid>
       </StyledDiv>
-      <Grid container spacing={1} style={gridCss}>
-        <Result />
-      </Grid>
     </Container>
   );
 }

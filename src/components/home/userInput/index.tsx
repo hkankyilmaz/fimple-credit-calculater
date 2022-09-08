@@ -1,4 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+} from "react";
 import "animate.css";
 import LanguageContext from "../../../store/languageContext";
 import IThemeContext from "../../../store/themeContext";
@@ -8,10 +13,23 @@ import { useForm } from "react-hook-form";
 import { FormInputs } from "./userInput";
 import ErrorField from "./errorField";
 import { focusImput } from "../../../customHook/focusImput";
+import IinfoContext from "../../../store/inputInfoContext";
+import Result from "./Result";
 
-const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
+const UserInput = React.forwardRef<any>((props, inputRef) => {
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
+  const { info, setInfo } = useContext(IinfoContext);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useImperativeHandle(inputRef, () => {
+    return {
+      focusInput: () => {
+        const input = ref.current?.lastChild as HTMLElement;
+        input !== null && input.focus();
+      },
+    };
+  });
 
   const {
     register,
@@ -21,11 +39,21 @@ const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({ criteriaMode: "all" });
-  const onSubmit = (data: FormInputs) => console.log(data, errors);
+  const onSubmit = (data: FormInputs) => {
+    setInfo({
+      principal: data.principal,
+      profitRate: data.profitRate,
+      taxRateBSMV: data.taxeRateBSMV,
+      taxRateKKDF: data.taxeRateKKDF,
+      numberOfIns: data.numOfIns,
+      insInterval: data.insInterval,
+    });
+  };
   const watchFields = watch(["numOfIns", "insInterval"]);
 
   useEffect(() => {
     focusImput(getValues(), setFocus);
+    console.log(info);
   }, [watchFields]);
 
   return (
@@ -50,7 +78,7 @@ const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input" ref={inputRef}>
+            <div className="input" ref={ref}>
               <input
                 autoComplete="off"
                 placeholder={text.home.principalPlaceHolder}
@@ -224,6 +252,7 @@ const UserInput = React.forwardRef<HTMLDivElement>((props, inputRef) => {
         </Grid>
         <button type="submit">{text.home.calculateButton}</button>
       </StyledForm>
+      <Result />
     </>
   );
 });

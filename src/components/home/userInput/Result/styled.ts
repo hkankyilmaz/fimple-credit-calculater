@@ -43,8 +43,15 @@ export const StyledDiv = styled.div<IItheme>`
     font-weight: bold;
   }
   .sc-txt {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     height: 2em;
     width: 50%;
+    padding: 0.5em 0.5em;
+    flex: 1;
+    color: #8c8c8c;
+    font-size: ${(props) => props.theme.fontSizes.small};
     background-color: ${(props) => props.theme.colors.white};
     border-radius: ${(props) => props.theme.radius.small};
   }
