@@ -94,7 +94,6 @@ export const StyledForm = styled.form<IItheme>`
   button {
     margin-top: ${(props) => props.theme.gutters.big};
     position: relative;
-    left: 50%;
-    transform: translateX(-48%);
+    margin-right: ${(props) => props.theme.gutters.smallBig};
   }
 `;

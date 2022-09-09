@@ -1,11 +1,11 @@
-import React, { useContext, useImperativeHandle } from "react";
+import React, { useContext } from "react";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
-import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import LanguageContext from "../../../../store/languageContext";
 import IThemeContext from "../../../../store/themeContext";
 import { StyledDiv, StyledH1 } from "./styled";
 import IinfoContext from "../../../../store/inputInfoContext";
+import $ from "jquery";
+import { FormInputs } from "../userInput";
 
 const gridCss = {
   display: "flex",
@@ -14,25 +14,31 @@ const gridCss = {
   alignItems: "center",
 };
 
-const Result = () => {
+const Result = React.forwardRef<HTMLElement>((props, ref) => {
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
   const { info } = useContext(IinfoContext);
 
+  const handleClick = (param: string): void => {
+    if (param === "complete") {
+      $("#reset-btn").trigger("click");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(() => {
+        $(".h1,.div").css("display", "none");
+      }, 1000);
+    }
+  };
+
   return (
     <>
-      <StyledH1 Itheme={Itheme} className="animate__animated animate__fadeInUp">
-        <CreditScoreIcon
-          style={{ marginRight: "20px", fontSize: "50px", color: "#09D3AC" }}
-        />
-        {text.home.resultScreen.completedText}
-      </StyledH1>
-      <StyledDiv Itheme={Itheme}>
+      <StyledH1 className="h1" ref={ref} language={language} Itheme={Itheme} />
+      <StyledDiv className="div" Itheme={Itheme}>
         <Grid container item spacing={2}>
           <Grid sx={gridCss} container item xs={12} md={6}>
             <h4>
               Kullanıcı Girdisi <hr />
             </h4>
+
             <div>
               <p className="frs-txt">
                 {text.home.principal} <span>:</span>
@@ -102,12 +108,16 @@ const Result = () => {
           </Grid>
         </Grid>
         <div className="btn-container">
-          <button> {text.home.resultScreen.completeBtn} </button>
-          <button> {text.home.resultScreen.showButton} </button>
+          <button type="reset" onClick={() => handleClick("complete")}>
+            {text.home.resultScreen.completeBtn}
+          </button>
+          <button onClick={() => handleClick("show")}>
+            {text.home.resultScreen.showButton}
+          </button>
         </div>
       </StyledDiv>
     </>
   );
-};
+});
 
 export default Result;

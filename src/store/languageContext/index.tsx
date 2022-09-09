@@ -58,6 +58,8 @@ export const LanguageProvider = ({ children }: IChildren) => {
       insIntervalOptTwo: language === "turkish" ? "Aylık" : "Montly",
       insIntervalOptThree: language === "turkish" ? "Haftalık" : "Weekly",
       calculateButton: language === "turkish" ? "Hesapla" : "Calculate",
+      resetteButton:
+        language === "turkish" ? "Formu Sıfırla" : "Reset the Form",
       totalRefund:
         language === "turkish" ? "Toplam Geri Ödeme" : "Total Refund",
       montlyIns: language === "turkish" ? "Aylık Taksit" : "Montly Installment",

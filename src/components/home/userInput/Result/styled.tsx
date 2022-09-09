@@ -1,7 +1,10 @@
+import React from "react";
 import styled from "styled-components";
+import CreditScoreIcon from "@mui/icons-material/CreditScore";
 interface IItheme {
   Itheme?: string;
   className?: string;
+  language?: string;
 }
 
 export const StyledDiv = styled.div<IItheme>`
@@ -89,8 +92,34 @@ export const StyledDiv = styled.div<IItheme>`
     }
   }
 `;
-
+/*
 export const StyledH1 = styled.h1<IItheme>`
+  font-size: ${(props) => props.theme.fontSizes.biggest};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: ${(props) => props.theme.gutters.small};
+  color: ${(props) =>
+    props.Itheme === "light"
+      ? props.theme.colors.black
+      : props.theme.colors.white};
+`;
+*/
+
+const hOne: any = React.forwardRef(
+  (props: IItheme, ref?: React.Ref<HTMLDivElement>) => (
+    <h1 className={props.className} ref={ref}>
+      <CreditScoreIcon
+        style={{ marginRight: "20px", fontSize: "50px", color: "#09D3AC" }}
+      />
+      {props.language === "turkihs"
+        ? "Hesaplamanız Tamamlandı"
+        : "Your Calculate is Completed"}
+    </h1>
+  )
+);
+
+export const StyledH1 = styled(hOne)<IItheme>`
   font-size: ${(props) => props.theme.fontSizes.biggest};
   display: flex;
   justify-content: center;

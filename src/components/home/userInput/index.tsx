@@ -4,6 +4,7 @@ import React, {
   useRef,
   useImperativeHandle,
 } from "react";
+import $ from "jquery";
 import "animate.css";
 import LanguageContext from "../../../store/languageContext";
 import IThemeContext from "../../../store/themeContext";
@@ -15,12 +16,14 @@ import ErrorField from "./errorField";
 import { focusImput } from "../../../customHook/focusImput";
 import IinfoContext from "../../../store/inputInfoContext";
 import Result from "./Result";
+import { handleScroll } from "../../../customHook/handleScroll";
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
   const { info, setInfo } = useContext(IinfoContext);
   const ref = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(inputRef, () => {
     return {
@@ -32,6 +35,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
   });
 
   const {
+    reset,
     register,
     watch,
     getValues,
@@ -48,12 +52,20 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
       numberOfIns: data.numOfIns,
       insInterval: data.insInterval,
     });
+    console.log(data);
+
+    resultRef.current !== null &&
+      $(resultRef.current).addClass(
+        "animate__animated animate__fadeInUp  animate__delay-1s"
+      );
+    $(".h1,.div").css("display", "block");
+
+    handleScroll(resultRef);
   };
   const watchFields = watch(["numOfIns", "insInterval"]);
 
   useEffect(() => {
     focusImput(getValues(), setFocus);
-    console.log(info);
   }, [watchFields]);
 
   return (
@@ -250,9 +262,14 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             <ErrorField message={errors?.insInterval?.message || null} />
           </Grid>
         </Grid>
-        <button type="submit">{text.home.calculateButton}</button>
+        <Grid sx={{ justifyContent: "center" }} container item xs={12}>
+          <button id="reset-btn" onClick={() => reset()} type="button">
+            {text.home.resetteButton}
+          </button>
+          <button type="submit">{text.home.calculateButton}</button>
+        </Grid>
       </StyledForm>
-      <Result />
+      <Result ref={resultRef} />
     </>
   );
 });
