@@ -18,6 +18,7 @@ import { focusImput } from "../../../customHook/focusImput";
 import IinfoContext from "../../../store/inputInfoContext";
 import Result from "./Result";
 import { handleScroll } from "../../../customHook/handleScroll";
+import { ErrorMessage } from "@hookform/error-message";
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
   const { text, language } = useContext(LanguageContext);
@@ -273,7 +274,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           <button type="submit">{text.home.calculateButton}</button>
         </Grid>
       </StyledForm>
-      <AlertMessage ref={alertRef} />
+      <AlertMessage err={errors} ref={alertRef} />
       <Result ref={resultRef} />
     </>
   );

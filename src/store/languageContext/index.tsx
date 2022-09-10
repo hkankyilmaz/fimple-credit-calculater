@@ -139,6 +139,18 @@ export const LanguageProvider = ({ children }: IChildren) => {
               : "This input is number only",
         },
       },
+      alert: {
+        success: language === "turkish" ? "İşlem Başarılı" : "Success",
+        successTitle:
+          language === "turkish"
+            ? "Sonuçlarınız Ekrana Yansıyacaktır"
+            : "Results will be displaying",
+        fail: language === "turkish" ? "İşlem Başarısız" : "Fail",
+        failTitle:
+          language === "turkish"
+            ? "Lütfen Formu Kontrol Edin"
+            : "Please check the form",
+      },
     },
     footer: {
       footerText: language === "turkish" ? " 2022 CalCredit" : "2022 CalCredit",
