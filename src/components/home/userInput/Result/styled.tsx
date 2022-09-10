@@ -8,9 +8,13 @@ interface IItheme {
 }
 
 export const StyledDiv = styled.div<IItheme>`
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
   padding: 20px 35px;
-  margin-top: ${(props) => props.theme.gutters.largest};
+  margin-top: ${(props) => props.theme.gutters.big};
   margin-bottom: ${(props) => props.theme.gutters.largest};
   background-color: ${(props) =>
     props.Itheme === "light"
@@ -92,25 +96,16 @@ export const StyledDiv = styled.div<IItheme>`
     }
   }
 `;
-/*
-export const StyledH1 = styled.h1<IItheme>`
-  font-size: ${(props) => props.theme.fontSizes.biggest};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: ${(props) => props.theme.gutters.small};
-  color: ${(props) =>
-    props.Itheme === "light"
-      ? props.theme.colors.black
-      : props.theme.colors.white};
-`;
-*/
 
 const hOne: any = React.forwardRef(
   (props: IItheme, ref?: React.Ref<HTMLDivElement>) => (
     <h1 className={props.className} ref={ref}>
       <CreditScoreIcon
-        style={{ marginRight: "20px", fontSize: "50px", color: "#09D3AC" }}
+        style={{
+          marginRight: "20px",
+          fontSize: "50px",
+          color: "#09D3AC",
+        }}
       />
       {props.language === "turkihs"
         ? "Hesaplamanız Tamamlandı"
@@ -121,7 +116,7 @@ const hOne: any = React.forwardRef(
 
 export const StyledH1 = styled(hOne)<IItheme>`
   font-size: ${(props) => props.theme.fontSizes.biggest};
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   margin-bottom: ${(props) => props.theme.gutters.small};

@@ -59,6 +59,10 @@ export const StyledDiv = styled.div<IItheme>`
     padding: 20px;
     top: 0;
     z-index: 11;
+    box-shadow: ${(props) =>
+      props.Itheme === "light"
+        ? props.theme.boxShadow.lightDark
+        : props.theme.boxShadow.dark};
     transition: background-color 1s ease;
     .btn-s {
       display: flex;

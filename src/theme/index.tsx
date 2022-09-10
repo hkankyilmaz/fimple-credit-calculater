@@ -78,6 +78,7 @@ export const theme = {
   },
   boxShadow: {
     light: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+    lightDark: " rgb(38, 57, 77) 0px 15px 10px -15px;",
     dark: "rgba(242, 242, 250, 0.2) 0px 7px 29px 0px",
   },
 };

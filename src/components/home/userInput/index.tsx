@@ -8,6 +8,7 @@ import $ from "jquery";
 import "animate.css";
 import LanguageContext from "../../../store/languageContext";
 import IThemeContext from "../../../store/themeContext";
+import AlertMessage from "./alert";
 import Grid from "@mui/material/Grid";
 import { StyledForm } from "./styled";
 import { useForm } from "react-hook-form";
@@ -24,6 +25,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
   const { info, setInfo } = useContext(IinfoContext);
   const ref = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const alertRef = useRef<any>(null);
 
   useImperativeHandle(inputRef, () => {
     return {
@@ -43,6 +45,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({ criteriaMode: "all" });
+
   const onSubmit = (data: FormInputs) => {
     setInfo({
       principal: data.principal,
@@ -52,13 +55,14 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
       numberOfIns: data.numOfIns,
       insInterval: data.insInterval,
     });
-    console.log(data);
+
+    alertRef.current.openAlert();
 
     resultRef.current !== null &&
       $(resultRef.current).addClass(
         "animate__animated animate__fadeInUp  animate__delay-1s"
       );
-    $(".h1,.div").css("display", "block");
+    $(".h1,.div").css("display", "flex");
 
     handleScroll(resultRef);
   };
@@ -269,6 +273,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           <button type="submit">{text.home.calculateButton}</button>
         </Grid>
       </StyledForm>
+      <AlertMessage ref={alertRef} />
       <Result ref={resultRef} />
     </>
   );
