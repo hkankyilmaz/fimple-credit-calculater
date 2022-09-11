@@ -107,7 +107,7 @@ const hOne: any = React.forwardRef(
           color: "#09D3AC",
         }}
       />
-      {props.language === "turkihs"
+      {props.language === "turkish"
         ? "Hesaplamanız Tamamlandı"
         : "Your Calculate is Completed"}
     </h1>

@@ -143,8 +143,8 @@ export const LanguageProvider = ({ children }: IChildren) => {
         success: language === "turkish" ? "İşlem Başarılı" : "Success",
         successTitle:
           language === "turkish"
-            ? "Sonuçlarınız Ekrana Yansıyacaktır"
-            : "Results will be displaying",
+            ? "Sonuçlarınız Ekrana Yansıtılmıştır"
+            : "Results have been displayed",
         fail: language === "turkish" ? "İşlem Başarısız" : "Fail",
         failTitle:
           language === "turkish"

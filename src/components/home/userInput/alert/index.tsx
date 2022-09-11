@@ -19,72 +19,82 @@ function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="left" />;
 }
 
-export const AlertMessage = React.forwardRef<any, any>((props, alertRef) => {
-  const { text } = useContext(LanguageContext);
-  console.log(props);
-  const Iseverity: any = props.errors.err === null ? "success" : "error";
-  const bg: string = props.erros.err !== null ? "rgba(9, 211, 172,0.8)" : "red";
-  const [state, setState] = React.useState<{
-    open: boolean;
-    Transition: React.ComponentType<
-      TransitionProps & {
-        children: React.ReactElement<any, any>;
-      }
-    >;
-  }>({
-    open: false,
-    Transition: Fade,
-  });
-
-  console.log(state);
-
-  useImperativeHandle(alertRef, () => {
-    return {
-      openAlert: () => setState({ Transition: SlideTransition, open: true }),
-    };
-  });
-
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setState({
+export const AlertMessage = React.forwardRef<any, any>(
+  ({ errors }, alertRef) => {
+    const { text } = useContext(LanguageContext);
+    const [state, setState] = React.useState<{
+      open: boolean;
+      Transition: React.ComponentType<
+        TransitionProps & {
+          children: React.ReactElement<any, any>;
+        }
+      >;
+    }>({
       open: false,
       Transition: Fade,
     });
-  };
 
-  console.log(state);
+    useImperativeHandle(alertRef, () => {
+      return {
+        openAlert: () => setState({ Transition: SlideTransition, open: true }),
+      };
+    });
 
-  return (
-    <Stack spacing={2}>
-      <Snackbar
-        sx={{ transform: "translateY(60px)" }}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        TransitionComponent={state.Transition}
-        open={state.open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-      >
-        <Alert
-          sx={{
-            backgroundColor: { bg },
-            width: "100%",
-          }}
-          severity={Iseverity}
+    const handleClose = (
+      event?: React.SyntheticEvent | Event,
+      reason?: string
+    ) => {
+      if (reason === "clickaway") {
+        return;
+      }
+
+      setState({
+        open: false,
+        Transition: Fade,
+      });
+    };
+
+    return (
+      <Stack spacing={2}>
+        <Snackbar
+          sx={{ transform: "translateY(60px)" }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          TransitionComponent={state.Transition}
+          open={state.open}
+          autoHideDuration={4000}
+          onClose={handleClose}
         >
-          <AlertTitle sx={{ fontWeight: "bold" }}>
-            {text.home.alert.success}
-          </AlertTitle>
-          {text.home.alert.successTitle}
-        </Alert>
-      </Snackbar>
-    </Stack>
-  );
-});
+          {Object.keys(errors).length === 0 ? (
+            <Alert
+              sx={{
+                backgroundColor: "rgba(9, 211, 172,1)",
+                width: "100%",
+              }}
+              severity="success"
+            >
+              <AlertTitle sx={{ fontWeight: "bold" }}>
+                {text.home.alert.success}
+              </AlertTitle>
+              {text.home.alert.successTitle}
+            </Alert>
+          ) : (
+            <Alert
+              sx={{
+                backgroundColor: "#ff9999",
+                width: "100%",
+              }}
+              severity="error"
+            >
+              <AlertTitle sx={{ fontWeight: "bold" }}>
+                {text.home.alert.fail}
+              </AlertTitle>
+              {text.home.alert.failTitle}
+            </Alert>
+          )}
+        </Snackbar>
+      </Stack>
+    );
+  }
+);
 
 export default AlertMessage;
