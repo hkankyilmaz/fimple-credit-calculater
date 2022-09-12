@@ -20,6 +20,7 @@ import Result from "./Result";
 import { handleScroll } from "../../../customHook/handleScroll";
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
+  const [click, setClick] = React.useState(0);
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
   const { info, setInfo } = useContext(IinfoContext);
@@ -45,6 +46,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({ criteriaMode: "all" });
+  const watchFields = watch(["numOfIns", "insInterval"]);
 
   const onSubmit = (data: FormInputs) => {
     setInfo({
@@ -66,7 +68,14 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
 
     handleScroll(resultRef);
   };
-  const watchFields = watch(["numOfIns", "insInterval"]);
+
+  const IhandleClick = (): void => {
+    reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(() => {
+      $(".h1,.div").css("display", "none");
+    }, 1000);
+  };
 
   useEffect(() => {
     focusImput(getValues(), setFocus);
@@ -74,7 +83,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
 
   useEffect(() => {
     Object.keys(errors).length !== 0 && alertRef.current.openAlert();
-  }, [errors]);
+  }, [click, errors]);
 
   return (
     <>
@@ -271,10 +280,12 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           </Grid>
         </Grid>
         <Grid sx={{ justifyContent: "center" }} container item xs={12}>
-          <button id="reset-btn" onClick={() => reset()} type="button">
+          <button id="reset-btn" onClick={() => IhandleClick()} type="button">
             {text.home.resetteButton}
           </button>
-          <button type="submit">{text.home.calculateButton}</button>
+          <button onClick={() => setClick(click + 1)} type="submit">
+            {text.home.calculateButton}
+          </button>
         </Grid>
       </StyledForm>
       <AlertMessage errors={errors} ref={alertRef} />

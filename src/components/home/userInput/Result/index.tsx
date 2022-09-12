@@ -6,6 +6,7 @@ import { StyledDiv, StyledH1 } from "./styled";
 import IinfoContext from "../../../../store/inputInfoContext";
 import $ from "jquery";
 import { FormInputs } from "../userInput";
+import StickyHeadTable from "./paymentSchedule";
 
 const gridCss = {
   display: "flex",
@@ -22,10 +23,6 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
   const handleClick = (param: string): void => {
     if (param === "complete") {
       $("#reset-btn").trigger("click");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setTimeout(() => {
-        $(".h1,.div").css("display", "none");
-      }, 1000);
     }
   };
 

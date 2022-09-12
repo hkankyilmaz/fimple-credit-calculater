@@ -151,9 +151,20 @@ export const LanguageProvider = ({ children }: IChildren) => {
             ? "Lütfen Formu Kontrol Edin"
             : "Please check the form",
       },
+      schedule: {
+        InsNum:
+          language === "turkish" ? "Taksit Numarası" : "Installment Number",
+        InsAmount:
+          language === "turkish" ? "Taksit Miktarı" : "Installment Amount",
+        principal: language === "turkish" ? "Ana Para" : "Principal",
+        remainPrincipal:
+          language === "turkish" ? "Kalan Ana Para" : "Remain Principal",
+        profitAmount: language === "turkish" ? "Kar Tutarı" : "Profit Amount",
+        rowPerPage: language === "turkish" ? "Kar Tutarı" : "Profit Amount",
+      },
     },
     footer: {
-      footerText: language === "turkish" ? " 2022 CalCredit" : "2022 CalCredit",
+      footerText: language === "turkish" ? " Satır aralığı" : "Rows per page",
     },
   };
 
