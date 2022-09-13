@@ -1,19 +1,19 @@
 export interface IInfoProps {
-  principal?: number | null;
-  profitRate?: number | null;
-  taxRateBSMV?: number | null;
-  taxRateKKDF?: number | null;
-  numberOfIns?: number | null;
+  principal?: string | null;
+  profitRate?: string | null;
+  taxRateBSMV?: string | null;
+  taxRateKKDF?: string | null;
+  numberOfIns?: string | null;
   insInterval?: string | null;
 }
 
 export interface IInfoPropsContext {
   info: {
-    principal?: number | null;
-    profitRate?: number | null;
-    taxRateBSMV?: number | null;
-    taxRateKKDF?: number | null;
-    numberOfIns?: number | null;
+    principal?: string | null;
+    profitRate?: string | null;
+    taxRateBSMV?: string | null;
+    taxRateKKDF?: string | null;
+    numberOfIns?: string | null;
     insInterval?: string | null;
   };
   setInfo: React.Dispatch<React.SetStateAction<{}>>;

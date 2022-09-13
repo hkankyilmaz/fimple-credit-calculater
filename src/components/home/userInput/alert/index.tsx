@@ -61,7 +61,7 @@ export const AlertMessage = React.forwardRef<any, any>(
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           TransitionComponent={state.Transition}
           open={state.open}
-          autoHideDuration={4000}
+          autoHideDuration={3000}
           onClose={handleClose}
         >
           {Object.keys(errors).length === 0 ? (

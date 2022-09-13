@@ -241,7 +241,9 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 {Array(12)
                   .fill("")
                   .map((item, idx) => (
-                    <option value={(idx + 1) * 3}> {(idx + 1) * 3} </option>
+                    <option key={idx} value={(idx + 1) * 3}>
+                      {(idx + 1) * 3}
+                    </option>
                   ))}
               </select>
             </div>

@@ -6,6 +6,7 @@ import { StyledDiv } from "./styled";
 import IThemeContext from "../../store/themeContext";
 import UserInput from "./userInput";
 import { handleScroll } from "../../customHook/handleScroll";
+import CalculateSchedule from "../../customHook/calculateSchedule.tsx";
 
 function Home() {
   const { text } = useContext(LanguageContext);
@@ -37,6 +38,7 @@ function Home() {
           <UserInput ref={inputRef} />
         </Grid>
       </StyledDiv>
+      <CalculateSchedule />
     </Container>
   );
 }
