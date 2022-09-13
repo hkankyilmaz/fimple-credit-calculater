@@ -5,8 +5,7 @@ import IThemeContext from "../../../../store/themeContext";
 import { StyledDiv, StyledH1 } from "./styled";
 import IinfoContext from "../../../../store/inputInfoContext";
 import $ from "jquery";
-import { FormInputs } from "../userInput";
-import StickyHeadTable from "./paymentSchedule";
+import Portal from "./portal";
 
 const gridCss = {
   display: "flex",
@@ -18,11 +17,15 @@ const gridCss = {
 const Result = React.forwardRef<HTMLElement>((props, ref) => {
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
+  const [open, setOpen] = React.useState(false);
   const { info } = useContext(IinfoContext);
 
   const handleClick = (param: string): void => {
     if (param === "complete") {
       $("#reset-btn").trigger("click");
+    }
+    if (param === "show") {
+      setOpen(true);
     }
   };
 
@@ -113,6 +116,7 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
           </button>
         </div>
       </StyledDiv>
+      <Portal open={open} setOpen={setOpen} />
     </>
   );
 });

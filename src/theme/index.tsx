@@ -12,7 +12,10 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     background-color: #f2f2f2;
     transition:background-color 0.3s ease ;
+    position: relative;
+    
  }
+
   
 `;
 

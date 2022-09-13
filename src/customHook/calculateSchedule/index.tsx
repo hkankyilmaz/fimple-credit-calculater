@@ -71,8 +71,9 @@ const CalculateSchedule = () => {
           bsmv,
         });
       });
+
+    return infoSchedule;
   }
-  return null;
 };
 
 export default CalculateSchedule;

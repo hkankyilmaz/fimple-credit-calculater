@@ -7,10 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import LanguageContext from "../../../../../store/languageContext";
+import LanguageContext from "../../../../../../store/languageContext";
 import { Column, Data } from "./paymentSchedule";
 import $ from "jquery";
-import CalculateSchedule from "../../../../../customHook/calculateSchedule.tsx";
+import CalculateSchedule from "../../../../../../customHook/calculateSchedule";
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
@@ -169,7 +169,6 @@ export default function StickyHeadTable() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <CalculateSchedule />
     </Paper>
   );
 }
