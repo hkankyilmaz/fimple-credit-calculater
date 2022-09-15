@@ -11,13 +11,7 @@ const ErrorField: React.FC<IProps> = ({ message }) => {
       <Grid item xs={12} md={8}>
         {message && (
           <StyledPError>
-            <ErrorIcon
-              sx={{
-                marginRight: "5px",
-                color: "#ff9999",
-                fontSize: "17px",
-              }}
-            />
+            <ErrorIcon sx={{marginRight: "5px",  color: "#ff9999",  fontSize: "17px", }}/>
             {message}
           </StyledPError>
         )}

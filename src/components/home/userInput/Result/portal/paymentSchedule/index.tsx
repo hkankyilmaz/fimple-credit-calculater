@@ -83,7 +83,6 @@ export default function StickyHeadTable() {
   ];
 
   const Irows = CalculateSchedule();
-  console.log(Irows);
   const rows = Irows;
 
   const handleChangePage = (event: unknown, newPage: number) => {

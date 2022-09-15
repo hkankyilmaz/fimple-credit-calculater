@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import Grid from "@mui/material/Grid";
 import LanguageContext from "../../../../store/languageContext";
 import IThemeContext from "../../../../store/themeContext";
-import { StyledDiv, StyledH1 } from "./styled";
 import IinfoContext from "../../../../store/inputInfoContext";
 import { calculatedValues } from "../../../../customHook/calculateSchedule";
+import { StyledDiv, StyledH1 } from "./styled";
+import Grid from "@mui/material/Grid";
 import $ from "jquery";
 import Portal from "./portal";
 
@@ -23,12 +23,8 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
   const IcalculatedValues = calculatedValues();
 
   const handleClick = (param: string): void => {
-    if (param === "complete") {
-      $("#reset-btn").trigger("click");
-    }
-    if (param === "show") {
-      setOpen(true);
-    }
+    if (param === "complete") $("#reset-btn").trigger("click");
+    if (param === "show")  setOpen(true); 
   };
 
   return (
@@ -40,7 +36,6 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
             <h4>
               Kullanıcı Girdisi <hr />
             </h4>
-
             <div>
               <p className="frs-txt">
                 {text.home.principal} <span>:</span>

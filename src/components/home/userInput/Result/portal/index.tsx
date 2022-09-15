@@ -4,7 +4,6 @@ import StickyHeadTable from "./paymentSchedule";
 import { IProps } from "./portal";
 import { ICloseIcon, ModalContainer } from "./styled";
 import Container from "@mui/material/Container";
-import { handleScroll } from "../../../../../customHook/handleScroll";
 
 const Portal: React.FC<IProps> = ({ open, setOpen }) => {
   const ref = React.useRef<any>();

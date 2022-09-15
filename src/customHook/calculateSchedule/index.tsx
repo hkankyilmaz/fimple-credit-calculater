@@ -13,14 +13,10 @@ export const CalculateSchedule = () => {
     typeof info.taxRateBSMV === "string" &&
     typeof info.taxRateKKDF === "string"
   ) {
-    const profitRate =
-      +info.profitRate *
-      0.01 *
-      (1 + 0.01 * (+info.taxRateBSMV + +info.taxRateKKDF));
-    const IinsAmount =
-      (+info.principal *
-        (profitRate * Math.pow(profitRate + 1, +info.numberOfIns))) /
-      (Math.pow(profitRate + 1, +info.numberOfIns) - 1);
+    
+    const profitRate = +info.profitRate * 0.01 * (1 + 0.01 * (+info.taxRateBSMV + +info.taxRateKKDF));
+    const IinsAmount = (+info.principal * (profitRate * Math.pow(profitRate + 1, +info.numberOfIns))) /(Math.pow(profitRate + 1, +info.numberOfIns) - 1);
+            
     const insNo = 1;
     const insAmount = IinsAmount;
     const profitAmount = +info.principal * 0.01 * +info.profitRate;
@@ -34,17 +30,12 @@ export const CalculateSchedule = () => {
     const inputOfbsmv = +info.taxRateBSMV;
 
     const infoSchedule: IinfoSchedule[] = [
-      {
-        insNo,
-        insAmount,
-        Iprincipal,
-        remainPrincipal,
-        profitAmount,
-        kkdf,
-        bsmv,
-      },
+        
+      { insNo,insAmount, Iprincipal, remainPrincipal, profitAmount,kkdf,bsmv },
+           
     ];
-    console.log(infoSchedule);
+
+    
     Array(+info.numberOfIns)
       .fill("")
       .map((item, idx) => {

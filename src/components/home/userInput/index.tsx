@@ -1,29 +1,25 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useImperativeHandle,
-} from "react";
-import $ from "jquery";
-import "animate.css";
+import React, {useContext,  useEffect,useRef, useImperativeHandle,} from "react";
 import LanguageContext from "../../../store/languageContext";
 import IThemeContext from "../../../store/themeContext";
+import ErrorField from "./errorField";
+import { focusImput } from "../../../customHook/focusImput";
+import IinfoContext from "../../../store/inputInfoContext";
+import { handleScroll } from "../../../customHook/handleScroll";
 import AlertMessage from "./alert";
 import Grid from "@mui/material/Grid";
 import { StyledForm } from "./styled";
 import { useForm } from "react-hook-form";
 import { FormInputs } from "./userInput";
-import ErrorField from "./errorField";
-import { focusImput } from "../../../customHook/focusImput";
-import IinfoContext from "../../../store/inputInfoContext";
 import Result from "./Result";
-import { handleScroll } from "../../../customHook/handleScroll";
+import $ from "jquery";
+import "animate.css";
+
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
   const [click, setClick] = React.useState(0);
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
-  const { info, setInfo } = useContext(IinfoContext);
+  const { setInfo } = useContext(IinfoContext);
   const ref = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const alertRef = useRef<any>(null);
@@ -37,15 +33,8 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     };
   });
 
-  const {
-    reset,
-    register,
-    watch,
-    getValues,
-    setFocus,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormInputs>({ criteriaMode: "all" });
+  const { reset,register,watch,getValues,setFocus,handleSubmit,formState: { errors }} = useForm<FormInputs>({ criteriaMode: "all" });
+   
   const watchFields = watch(["numOfIns", "insInterval"]);
 
   const onSubmit = (data: FormInputs) => {
@@ -60,21 +49,15 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
 
     alertRef.current.openAlert();
 
-    resultRef.current !== null &&
-      $(resultRef.current).addClass(
-        "animate__animated animate__fadeInUp  animate__delay-1s"
-      );
+    resultRef.current !== null && $(resultRef.current).addClass( "animate__animated animate__fadeInUp  animate__delay-1s" );
     $(".h1,.div").css("display", "flex");
-
     handleScroll(resultRef);
   };
 
   const IhandleClick = (): void => {
     reset();
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => {
-      $(".h1,.div").css("display", "none");
-    }, 1000);
+    setTimeout(() => { $(".h1,.div").css("display", "none"); }, 1000);
   };
 
   useEffect(() => {
