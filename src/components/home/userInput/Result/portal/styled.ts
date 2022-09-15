@@ -18,38 +18,43 @@ export const ModalContainer = styled.div<IProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: display-modal-in 0.2s ease-in-out;
+  animation: display-modal-in 0.3s ease-in-out;
 
-  @keyframes display-modal-in {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
   .MuiContainer-root {
     position: fixed;
     top: 25%;
+    animation: display-modal-in 0.3s ease-in-out;
   }
   #modal-cls-btn {
     position: absolute;
     right: -50px;
-    top: -50px;
-    background-color: transparent;
-    border-radius: 50%;
+    top: -60px;
+    background-color: ${(props) => props.theme.colors.white};
+    border-radius: ${(props) => props.theme.radius.small};
     padding: 5px 10px;
-    border: 2px solid ${(props) => props.theme.colors.green};
+    border: 2px solid ${(props) => props.theme.colors.white};
     cursor: pointer;
     :hover {
-      background-color: ${(props) => props.theme.colors.green};
-      border: 2px solid ${(props) => props.theme.colors.white};
+      scale: 1.05;
+    }
+  }
+
+  @keyframes display-modal-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @media (max-width: 1400px) {
+    #modal-cls-btn {
+      right: 25px;
+      top: -60px;
     }
   }
 `;
 
 export const ICloseIcon = styled(CloseIcon)`
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.green};
 `;

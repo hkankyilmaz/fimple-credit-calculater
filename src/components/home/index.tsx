@@ -6,7 +6,6 @@ import { StyledDiv } from "./styled";
 import IThemeContext from "../../store/themeContext";
 import UserInput from "./userInput";
 import { handleScroll } from "../../customHook/handleScroll";
-import CalculateSchedule from "../../customHook/calculateSchedule";
 
 function Home() {
   const { text } = useContext(LanguageContext);

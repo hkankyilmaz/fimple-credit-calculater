@@ -2,7 +2,7 @@ import { useContext } from "react";
 import IinfoContext from "../../store/inputInfoContext";
 import { IinfoSchedule } from "./calculateSchedule";
 
-const CalculateSchedule = () => {
+export const CalculateSchedule = () => {
   const { info } = useContext(IinfoContext);
 
   if (
@@ -45,7 +45,6 @@ const CalculateSchedule = () => {
       },
     ];
     console.log(infoSchedule);
-
     Array(+info.numberOfIns)
       .fill("")
       .map((item, idx) => {
@@ -71,9 +70,22 @@ const CalculateSchedule = () => {
           bsmv,
         });
       });
+    infoSchedule.pop();
 
     return infoSchedule;
   }
 };
 
-export default CalculateSchedule;
+export const calculatedValues = () => {
+  const infoValues = CalculateSchedule();
+  if (infoValues !== undefined) {
+    const totalRefund = infoValues[0].insAmount * infoValues.length;
+    const insAmound = infoValues[0].insAmount;
+    let totalTax = 0;
+    infoValues.map((payment) => {
+      totalTax += payment.profitAmount + payment.bsmv + payment.kkdf;
+    });
+
+    return [totalRefund, insAmound, totalTax];
+  } else return null;
+};

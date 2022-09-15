@@ -109,6 +109,8 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           <Grid item xs={12} md={8}>
             <div className="input" ref={ref}>
               <input
+                type="number"
+                step="any"
                 autoComplete="off"
                 placeholder={text.home.principalPlaceHolder}
                 {...register("principal", {
@@ -140,6 +142,8 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           <Grid item xs={12} md={8}>
             <div className="input">
               <input
+                type="number"
+                step="any"
                 autoComplete="off"
                 placeholder={text.home.profitRatePlaceHolder}
                 {...register("profitRate", {
@@ -171,6 +175,8 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           <Grid item xs={12} md={8}>
             <div className="input">
               <input
+                type="number"
+                step="any"
                 autoComplete="off"
                 placeholder={text.home.taxRateBSMVPlaceHolder}
                 {...register("taxeRateBSMV", {
@@ -202,6 +208,8 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           <Grid item xs={12} md={8}>
             <div className="input">
               <input
+                type="number"
+                step="any"
                 autoComplete="off"
                 placeholder={text.home.taxRateKKDFPlaceHolder}
                 {...register("taxeRateKKDF", {

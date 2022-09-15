@@ -152,8 +152,7 @@ export const LanguageProvider = ({ children }: IChildren) => {
             : "Please check the form",
       },
       schedule: {
-        InsNum:
-          language === "turkish" ? "Taksit Numarası" : "Installment Number",
+        InsNum: language === "turkish" ? "Taksit No" : "Ins No",
         InsAmount:
           language === "turkish" ? "Taksit Miktarı" : "Installment Amount",
         principal: language === "turkish" ? "Ana Para" : "Principal",
@@ -164,7 +163,7 @@ export const LanguageProvider = ({ children }: IChildren) => {
       },
     },
     footer: {
-      footerText: language === "turkish" ? " Satır aralığı" : "Rows per page",
+      footerText: language === "turkish" ? " CreditCal" : "CreditCal",
     },
   };
 

@@ -9,8 +9,9 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import LanguageContext from "../../../../../../store/languageContext";
 import { Column, Data } from "./paymentSchedule";
+import { IinfoSchedule } from "../../../../../../customHook/calculateSchedule/calculateSchedule";
 import $ from "jquery";
-import CalculateSchedule from "../../../../../../customHook/calculateSchedule";
+import { CalculateSchedule } from "../../../../../../customHook/calculateSchedule";
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
@@ -32,7 +33,7 @@ export default function StickyHeadTable() {
     {
       id: text.home.schedule.InsNum,
       label: text.home.schedule.InsNum,
-      minWidth: 125,
+      minWidth: 50,
     },
     {
       id: text.home.schedule.InsAmount,
@@ -60,57 +61,30 @@ export default function StickyHeadTable() {
     {
       id: "BSMV",
       label: "BSMV",
-      minWidth: 100,
+      minWidth: 75,
       align: "left",
     },
     {
       id: "KKDF",
       label: "KKDF",
-      minWidth: 100,
+      minWidth: 75,
       align: "left",
     },
   ];
 
-  const createData = (
-    IInsNum: number,
-    IInsAmount: number,
-    Iprincipal: number,
-    IremainPrincipal: number,
-    IprofitAmount: number,
-    Ibsmv: number,
-    Ikkdf: number
-  ) => {
-    return [
-      IInsNum,
-      IInsAmount,
-      Iprincipal,
-      IremainPrincipal,
-      IprofitAmount,
-      Ibsmv,
-      Ikkdf,
-    ];
-  };
-
-  const rows = [
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
-    createData(99999, 9999, 1324171354, 3287263, 9999, 9999, 9999),
+  const IColumns = [
+    "insNo",
+    "insAmount",
+    "Iprincipal",
+    "remainPrincipal",
+    "profitAmount",
+    "kkdf",
+    "bsmv",
   ];
+
+  const Irows = CalculateSchedule();
+  console.log(Irows);
+  const rows = Irows;
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -122,53 +96,63 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+  if (Irows === undefined) {
+    return null;
+  } else {
+    return (
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{
+                      minWidth: column.minWidth,
+                      fontWeight: "bold",
+                      color: "#09D3AC",
+                      fontSize: "15px",
+                    }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Irows.slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+              ).map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row[0]}>
-                    {columns.map((column, idx) => {
-                      const value = row[idx];
+                  <TableRow hover role="checkbox" tabIndex={-1}>
+                    {IColumns.map((column, idx) => {
+                      const value = row[column as keyof IinfoSchedule];
                       return (
-                        <TableCell key={column.id} align={column.align}>
-                          {value}
+                        <TableCell align="left">
+                          {value.toLocaleString()}
+                          {column !== "insNo" ? " TL" : null}
                         </TableCell>
                       );
                     })}
                   </TableRow>
                 );
               })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
-  );
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={Irows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+    );
+  }
 }
