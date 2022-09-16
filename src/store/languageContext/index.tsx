@@ -85,11 +85,11 @@ export const LanguageProvider = ({ children }: IChildren) => {
         principal: {
           max:
             language === "turkish"
-              ? "En fazla 100000000000 Tl girebilirsiniz "
-              : "You can enter a maximum of 100000000000 TL",
+              ? "En fazla 1,000,000 TL girebilirsiniz "
+              : "You can enter a maximum of 1,000,000 TL",
           min:
             language === "turkish"
-              ? "En ez 100 tl girebilirsiniz"
+              ? "En ez 100 TL girebilirsiniz"
               : "You can enter at least 100 TL",
           pattern:
             language === "turkish"

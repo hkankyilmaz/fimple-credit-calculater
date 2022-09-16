@@ -1,19 +1,25 @@
-import React, {useContext,  useEffect,useRef, useImperativeHandle,} from "react";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+} from "react";
 import LanguageContext from "../../../store/languageContext";
 import IThemeContext from "../../../store/themeContext";
 import ErrorField from "./errorField";
 import { focusImput } from "../../../customHook/focusImput";
 import IinfoContext from "../../../store/inputInfoContext";
 import { handleScroll } from "../../../customHook/handleScroll";
+import Cleave from "cleave.js/react";
 import AlertMessage from "./alert";
 import Grid from "@mui/material/Grid";
 import { StyledForm } from "./styled";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { FormInputs } from "./userInput";
 import Result from "./Result";
 import $ from "jquery";
 import "animate.css";
-
+import { info } from "console";
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
   const [click, setClick] = React.useState(0);
@@ -33,23 +39,38 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     };
   });
 
-  const { reset,register,watch,getValues,setFocus,handleSubmit,formState: { errors }} = useForm<FormInputs>({ criteriaMode: "all" });
-   
+  const {
+    control,
+    reset,
+    register,
+    watch,
+    getValues,
+    setFocus,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>({ criteriaMode: "all" });
+
   const watchFields = watch(["numOfIns", "insInterval"]);
+  // const watchFieldsAll = watch();
+  // console.log(watchFieldsAll);
 
   const onSubmit = (data: FormInputs) => {
-    setInfo({
-      principal: data.principal,
-      profitRate: data.profitRate,
-      taxRateBSMV: data.taxeRateBSMV,
-      taxRateKKDF: data.taxeRateKKDF,
-      numberOfIns: data.numOfIns,
-      insInterval: data.insInterval,
+    Object.entries(data).map((item, idx) => {
+      const temprr = item[1].replace(/[TL,% ]/g, (m: string) => "");
+      idx === 0 && setInfo({ ...info, numberOfIns: temprr });
+      idx === 1 && setInfo({ ...info, insInterval: temprr });
+      idx === 2 && setInfo({ ...info, principal: temprr });
+      idx === 3 && setInfo({ ...info, profitRate: temprr });
+      idx === 4 && setInfo({ ...info, taxeRateBSMV: temprr });
+      idx === 5 && setInfo({ ...info, taxeRateKKDF: temprr });
     });
 
     alertRef.current.openAlert();
 
-    resultRef.current !== null && $(resultRef.current).addClass( "animate__animated animate__fadeInUp  animate__delay-1s" );
+    resultRef.current !== null &&
+      $(resultRef.current).addClass(
+        "animate__animated animate__fadeInUp  animate__delay-1s"
+      );
     $(".h1,.div").css("display", "flex");
     handleScroll(resultRef);
   };
@@ -57,12 +78,14 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
   const IhandleClick = (): void => {
     reset();
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => { $(".h1,.div").css("display", "none"); }, 1000);
+    setTimeout(() => {
+      $(".h1,.div").css("display", "none");
+    }, 1000);
   };
 
-  useEffect(() => {
-    focusImput(getValues(), setFocus);
-  }, [watchFields]);
+  // useEffect(() => {
+  //   focusImput(getValues(), setFocus);
+  // }, [watchFields]);
 
   useEffect(() => {
     Object.keys(errors).length !== 0 && alertRef.current.openAlert();
@@ -91,26 +114,33 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <div className="input" ref={ref}>
-              <input
-                type="number"
-                step="any"
-                autoComplete="off"
-                placeholder={text.home.principalPlaceHolder}
-                {...register("principal", {
+              <Controller
+                name="principal"
+                control={control}
+                render={({ field }) => (
+                  <Cleave
+                    {...field}
+                    autoComplete="off"
+                    placeholder={text.home.principalPlaceHolder}
+                    options={{
+                      numeral: true,
+                      prefix: " TL",
+                      tailPrefix: true,
+                      noImmediatePrefix: true,
+                    }}
+                  />
+                )}
+                rules={{
                   required: text.home.errorField.required,
-                  max: {
-                    value: 100000000000,
+                  maxLength: {
+                    value: 14,
                     message: text.home.errorField.principal.max,
                   },
                   min: {
-                    value: 100,
+                    value: 8,
                     message: text.home.errorField.principal.min,
                   },
-                  pattern: {
-                    value: /\d+/,
-                    message: text.home.errorField.principal.pattern,
-                  },
-                })}
+                }}
               />
             </div>
           </Grid>
@@ -124,26 +154,29 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <div className="input">
-              <input
-                type="number"
-                step="any"
-                autoComplete="off"
-                placeholder={text.home.profitRatePlaceHolder}
-                {...register("profitRate", {
+              <Controller
+                name="profitRate"
+                control={control}
+                render={({ field }) => (
+                  <Cleave
+                    {...field}
+                    autoComplete="off"
+                    placeholder={text.home.profitRatePlaceHolder}
+                    options={{
+                      numeral: true,
+                      numeralThousandsGroupStyle: "none",
+                      prefix: "% ",
+                      noImmediatePrefix: true,
+                    }}
+                  />
+                )}
+                rules={{
                   required: text.home.errorField.required,
-                  max: {
-                    value: 30,
-                    message: text.home.errorField.profitRate.max,
+                  maxLength: {
+                    value: 7,
+                    message: text.home.errorField.principal.max,
                   },
-                  min: {
-                    value: 1.1,
-                    message: text.home.errorField.profitRate.min,
-                  },
-                  pattern: {
-                    value: /\d+/,
-                    message: text.home.errorField.profitRate.pattern,
-                  },
-                })}
+                }}
               />
             </div>
           </Grid>
@@ -157,27 +190,31 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <div className="input">
-              <input
-                type="number"
-                step="any"
-                autoComplete="off"
-                placeholder={text.home.taxRateBSMVPlaceHolder}
-                {...register("taxeRateBSMV", {
+              <Controller
+                name="taxeRateBSMV"
+                control={control}
+                render={({ field }) => (
+                  <Cleave
+                    {...field}
+                    autoComplete="off"
+                    placeholder={text.home.taxRateBSMVPlaceHolder}
+                    options={{
+                      numeral: true,
+                      numeralThousandsGroupStyle: "none",
+                      prefix: "% ",
+                      noImmediatePrefix: true,
+                      rawValueTrimPrefix: true,
+                    }}
+                  />
+                )}
+                rules={{
                   required: text.home.errorField.required,
-                  max: {
-                    value: 30,
-                    message: text.home.errorField.taxRateBSMV.max,
+                  maxLength: {
+                    value: 7,
+                    message: text.home.errorField.principal.max,
                   },
-                  min: {
-                    value: 1.1,
-                    message: text.home.errorField.taxRateBSMV.min,
-                  },
-                  pattern: {
-                    value: /\d+/,
-                    message: text.home.errorField.taxRateBSMV.pattern,
-                  },
-                })}
-              ></input>
+                }}
+              />
             </div>
           </Grid>
           <Grid item container xs={12}>
@@ -190,27 +227,31 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <div className="input">
-              <input
-                type="number"
-                step="any"
-                autoComplete="off"
-                placeholder={text.home.taxRateKKDFPlaceHolder}
-                {...register("taxeRateKKDF", {
+              <Controller
+                name="taxeRateKKDF"
+                control={control}
+                render={({ field }) => (
+                  <Cleave
+                    {...field}
+                    autoComplete="off"
+                    placeholder={text.home.taxRateKKDFPlaceHolder}
+                    options={{
+                      numeral: true,
+                      numeralThousandsGroupStyle: "none",
+                      prefix: "% ",
+                      noImmediatePrefix: true,
+                      rawValueTrimPrefix: true,
+                    }}
+                  />
+                )}
+                rules={{
                   required: text.home.errorField.required,
-                  max: {
-                    value: 30,
-                    message: text.home.errorField.taxeRateKKDF.max,
+                  maxLength: {
+                    value: 7,
+                    message: text.home.errorField.principal.max,
                   },
-                  min: {
-                    value: 1.1,
-                    message: text.home.errorField.taxeRateKKDF.min,
-                  },
-                  pattern: {
-                    value: /\d+/,
-                    message: text.home.errorField.taxeRateKKDF.pattern,
-                  },
-                })}
-              ></input>
+                }}
+              />
             </div>
           </Grid>
           <Grid item container xs={12}>
