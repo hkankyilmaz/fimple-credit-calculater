@@ -1,5 +1,7 @@
 import React from "react";
 
+// deprecated :)
+
 export const focusImput = (obj: any, func: any): void => {
   const arr = Object.entries(obj);
 

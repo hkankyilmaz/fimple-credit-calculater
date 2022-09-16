@@ -19,19 +19,14 @@ import { FormInputs } from "./userInput";
 import Result from "./Result";
 import $ from "jquery";
 import "animate.css";
-import { info } from "console";
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
-  const [input, setInput] = React.useState({
-    principal: "",
-    profitRate: "",
-    kkdf: "",
-    bsmv: "",
-  });
+
+  const [input, setInput] = React.useState({   principal: "",  profitRate: "", kkdf: "", bsmv: "",});
   const [click, setClick] = React.useState(0);
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
-  const { info, setInfo } = useContext(IinfoContext);
+  const { setInfo } = useContext(IinfoContext);
   const ref = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const alertRef = useRef<any>(null);
@@ -45,19 +40,8 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     };
   });
 
-  const {
-    control,
-    reset,
-    register,
-    watch,
-    getValues,
-    setFocus,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormInputs>({ criteriaMode: "all" });
-
-  const watchFields = watch(["numberOfIns", "insInterval"]);
-
+  const { control, reset, register,handleSubmit,formState: { errors },} = useForm<FormInputs>({ criteriaMode: "all" });
+  
   const onSubmit = (data: FormInputs) => {
     const valOne =
       data.principal !== undefined &&
@@ -77,39 +61,26 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     const valSix =
       data.insInterval !== undefined &&
       data.insInterval.replace(/[TL,% ]/g, (m: string) => "");
-    setInfo({
-      principal: valOne,
-      profitRate: valTwo,
-      taxRateBSMV: valThree,
-      taxRateKKDF: valFour,
-      numberOfIns: valFive,
-      insInterval: valSix,
-    });
 
-    console.log(info);
 
+    setInfo({ principal: valOne, profitRate: valTwo,  taxRateBSMV: valThree,  taxRateKKDF: valFour,numberOfIns: valFive,  insInterval: valSix,});
+        
     alertRef.current.openAlert();
 
-    resultRef.current !== null &&
-      $(resultRef.current).addClass(
-        "animate__animated animate__fadeInUp  animate__delay-1s"
-      );
+    resultRef.current !== null && $(resultRef.current).addClass(   "animate__animated animate__fadeInUp  animate__delay-1s");
+            
     $(".h1,.div").css("display", "flex");
+
     handleScroll(resultRef);
+    
   };
 
   const IhandleClick = (): void => {
     reset();
     setInput({ principal: "", profitRate: "", kkdf: "", bsmv: "" });
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => {
-      $(".h1,.div").css("display", "none");
-    }, 350);
+    setTimeout(() => {  $(".h1,.div").css("display", "none");}, 350);
   };
-
-  // useEffect(() => {
-  //   focusImput(getValues(), setFocus);
-  // }, [watchFields]);
 
   useEffect(() => {
     Object.keys(errors).length !== 0 && alertRef.current.openAlert();
