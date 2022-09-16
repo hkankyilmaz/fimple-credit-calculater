@@ -90,7 +90,7 @@ export const LanguageProvider = ({ children }: IChildren) => {
           min:
             language === "turkish"
               ? "En ez 100 TL girebilirsiniz"
-              : "You can enter at least 100 TL",
+              : "You can enter at least 1,000 TL",
           pattern:
             language === "turkish"
               ? "Bu alana sadece sayı girebilirsiniz"

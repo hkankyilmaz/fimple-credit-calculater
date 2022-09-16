@@ -6,6 +6,7 @@ import { StyledDiv } from "./styled";
 import IThemeContext from "../../store/themeContext";
 import UserInput from "./userInput";
 import { handleScroll } from "../../customHook/handleScroll";
+import $ from "jquery";
 
 function Home() {
   const { text } = useContext(LanguageContext);

@@ -41,7 +41,10 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
                 {text.home.principal} <span>:</span>
               </p>
               <p className="sc-txt">
-                {typeof info.principal === "string" ? info.principal : null}
+                {typeof info.principal === "string"
+                  ? (+info.principal).toLocaleString()
+                  : null}
+                {""} TL
               </p>
             </div>
             <div>
@@ -49,21 +52,23 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
                 {text.home.profitRate}
                 <span>:</span>
               </p>
-              <p className="sc-txt">{info.profitRate}</p>
+              <p className="sc-txt">
+                %{""} {info.profitRate}
+              </p>
             </div>
             <div>
               <p className="frs-txt">
                 {text.home.taxRateBSMV}
                 <span>:</span>
               </p>
-              <p className="sc-txt">{info.taxRateBSMV}</p>
+              <p className="sc-txt">% {info.taxRateBSMV}</p>
             </div>
             <div>
               <p className="frs-txt">
                 {text.home.taxRateKKDF}
                 <span>:</span>
               </p>
-              <p className="sc-txt">{info.taxRateKKDF}</p>
+              <p className="sc-txt">% {info.taxRateKKDF}</p>
             </div>
             <div>
               <p className="frs-txt">

@@ -12,7 +12,7 @@ export const StyledDiv = styled.div<IProps>`
   height: 5vh;
   background-color: ${(props) =>
     props.Itheme === "light" ? "#5d6b89" : "#3E475B"};
-  margin-top: ${(props) => props.theme.gutters.largestBig};
+  margin-top: ${(props) => props.theme.gutters.xlargest};
   transition: background-color 1s ease;
 `;
 

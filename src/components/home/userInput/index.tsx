@@ -22,10 +22,16 @@ import "animate.css";
 import { info } from "console";
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
+  const [input, setInput] = React.useState({
+    principal: "",
+    profitRate: "",
+    kkdf: "",
+    bsmv: "",
+  });
   const [click, setClick] = React.useState(0);
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
-  const { setInfo } = useContext(IinfoContext);
+  const { info, setInfo } = useContext(IinfoContext);
   const ref = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const alertRef = useRef<any>(null);
@@ -50,20 +56,37 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     formState: { errors },
   } = useForm<FormInputs>({ criteriaMode: "all" });
 
-  const watchFields = watch(["numOfIns", "insInterval"]);
-  // const watchFieldsAll = watch();
-  // console.log(watchFieldsAll);
+  const watchFields = watch(["numberOfIns", "insInterval"]);
 
   const onSubmit = (data: FormInputs) => {
-    Object.entries(data).map((item, idx) => {
-      const temprr = item[1].replace(/[TL,% ]/g, (m: string) => "");
-      idx === 0 && setInfo({ ...info, numberOfIns: temprr });
-      idx === 1 && setInfo({ ...info, insInterval: temprr });
-      idx === 2 && setInfo({ ...info, principal: temprr });
-      idx === 3 && setInfo({ ...info, profitRate: temprr });
-      idx === 4 && setInfo({ ...info, taxeRateBSMV: temprr });
-      idx === 5 && setInfo({ ...info, taxeRateKKDF: temprr });
+    const valOne =
+      data.principal !== undefined &&
+      data.principal.replace(/[TL,% ]/g, (m: string) => "");
+    const valTwo =
+      data.profitRate !== undefined &&
+      data.profitRate.replace(/[TL,% ]/g, (m: string) => "");
+    const valThree =
+      data.taxeRateBSMV !== undefined &&
+      data.taxeRateBSMV.replace(/[TL,% ]/g, (m: string) => "");
+    const valFour =
+      data.taxeRateKKDF !== undefined &&
+      data.taxeRateKKDF.replace(/[TL,% ]/g, (m: string) => "");
+    const valFive =
+      data.numberOfIns !== undefined &&
+      data.numberOfIns.replace(/[TL,% ]/g, (m: string) => "");
+    const valSix =
+      data.insInterval !== undefined &&
+      data.insInterval.replace(/[TL,% ]/g, (m: string) => "");
+    setInfo({
+      principal: valOne,
+      profitRate: valTwo,
+      taxRateBSMV: valThree,
+      taxRateKKDF: valFour,
+      numberOfIns: valFive,
+      insInterval: valSix,
     });
+
+    console.log(info);
 
     alertRef.current.openAlert();
 
@@ -77,10 +100,11 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
 
   const IhandleClick = (): void => {
     reset();
+    setInput({ principal: "", profitRate: "", kkdf: "", bsmv: "" });
     window.scrollTo({ top: 0, behavior: "smooth" });
     setTimeout(() => {
       $(".h1,.div").css("display", "none");
-    }, 1000);
+    }, 350);
   };
 
   // useEffect(() => {
@@ -105,7 +129,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             justifyContent: "center",
             alignItems: "center",
           }}
-          spacing={2}
+          spacing={1}
         >
           <Grid item xs={12} md={4}>
             <p>
@@ -120,6 +144,11 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 render={({ field }) => (
                   <Cleave
                     {...field}
+                    value={input.principal}
+                    onChange={(e) => {
+                      setInput({ ...input, principal: e.target.value });
+                      field.onChange(e.target.value);
+                    }}
                     autoComplete="off"
                     placeholder={text.home.principalPlaceHolder}
                     options={{
@@ -136,7 +165,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                     value: 14,
                     message: text.home.errorField.principal.max,
                   },
-                  min: {
+                  minLength: {
                     value: 8,
                     message: text.home.errorField.principal.min,
                   },
@@ -160,6 +189,11 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 render={({ field }) => (
                   <Cleave
                     {...field}
+                    value={input.profitRate}
+                    onChange={(e) => {
+                      setInput({ ...input, profitRate: e.target.value });
+                      field.onChange(e.target.value);
+                    }}
                     autoComplete="off"
                     placeholder={text.home.profitRatePlaceHolder}
                     options={{
@@ -196,6 +230,11 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 render={({ field }) => (
                   <Cleave
                     {...field}
+                    value={input.kkdf}
+                    onChange={(e) => {
+                      setInput({ ...input, kkdf: e.target.value });
+                      field.onChange(e.target.value);
+                    }}
                     autoComplete="off"
                     placeholder={text.home.taxRateBSMVPlaceHolder}
                     options={{
@@ -233,6 +272,11 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 render={({ field }) => (
                   <Cleave
                     {...field}
+                    value={input.bsmv}
+                    onChange={(e) => {
+                      setInput({ ...input, bsmv: e.target.value });
+                      field.onChange(e.target.value);
+                    }}
                     autoComplete="off"
                     placeholder={text.home.taxRateKKDFPlaceHolder}
                     options={{
@@ -265,7 +309,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
           <Grid item xs={12} md={8}>
             <div className="select">
               <select
-                {...register("numOfIns", {
+                {...register("numberOfIns", {
                   required: text.home.errorField.required,
                 })}
               >
@@ -281,7 +325,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </div>
           </Grid>
           <Grid container item xs={12}>
-            <ErrorField message={errors?.numOfIns?.message || null} />
+            <ErrorField message={errors?.numberOfIns?.message || null} />
           </Grid>
 
           <Grid item xs={12} md={4}>

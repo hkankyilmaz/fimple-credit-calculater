@@ -6,8 +6,9 @@ import IThemeContext from "../../store/themeContext";
 function Footer() {
   const { text } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
+
   return (
-    <StyledDiv Itheme={Itheme}>
+    <StyledDiv className="footer-div" Itheme={Itheme}>
       <StyledP>
         {text.footer.footerText} <span>®</span>
       </StyledP>

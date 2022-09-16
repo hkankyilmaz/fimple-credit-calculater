@@ -132,5 +132,8 @@ export const StyledDiv = styled.div<IItheme>`
         left: -30px;
       }
     }
+    h1 {
+      font-size: 35px;
+    }
   }
 `;
