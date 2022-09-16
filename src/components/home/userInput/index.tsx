@@ -166,7 +166,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                     message: text.home.errorField.principal.max,
                   },
                   minLength: {
-                    value: 8,
+                    value: 6,
                     message: text.home.errorField.principal.min,
                   },
                 }}
@@ -206,9 +206,10 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 )}
                 rules={{
                   required: text.home.errorField.required,
-                  maxLength: {
-                    value: 7,
-                    message: text.home.errorField.principal.max,
+                  pattern: {
+                    value:
+                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
+                    message: text.home.errorField.profitRate.pattern,
                   },
                 }}
               />
@@ -248,9 +249,10 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 )}
                 rules={{
                   required: text.home.errorField.required,
-                  maxLength: {
-                    value: 7,
-                    message: text.home.errorField.principal.max,
+                  pattern: {
+                    value:
+                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
+                    message: text.home.errorField.taxRateBSMV.pattern,
                   },
                 }}
               />
@@ -290,9 +292,10 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 )}
                 rules={{
                   required: text.home.errorField.required,
-                  maxLength: {
-                    value: 7,
-                    message: text.home.errorField.principal.max,
+                  pattern: {
+                    value:
+                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
+                    message: text.home.errorField.taxRateBSMV.pattern,
                   },
                 }}
               />
