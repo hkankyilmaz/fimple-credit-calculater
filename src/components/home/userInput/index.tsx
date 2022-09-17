@@ -42,6 +42,8 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
   const {control, reset, register,handleSubmit,formState: { errors },} = useForm<FormInputs>({ criteriaMode: "all" ,shouldFocusError:false});
      
   const onSubmit = (data: FormInputs) => {
+    // return the original value from formatted 
+    // value by Cleaver for UX (TL,%) for calculate
     const valOne =
       data.principal !== undefined &&
       data.principal.replace(/[TL,% ]/g, (m: string) => "");
@@ -60,7 +62,6 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     const valSix =
       data.insInterval !== undefined &&
       data.insInterval.replace(/[TL,% ]/g, (m: string) => "");
-
 
     setInfo({ principal: valOne, profitRate: valTwo,  taxRateBSMV: valThree,  taxRateKKDF: valFour,numberOfIns: valFive,  insInterval: valSix,});
     alertRef.current.openAlert();
@@ -82,6 +83,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
 
     Object.keys(errors).length !== 0 && alertRef.current.openAlert();
     
+    // focuses on not valid input
     const inputOne = refInputOne.current?.lastChild as HTMLElement;
     const inputTwo = refInputTwo.current?.lastChild as HTMLElement;
     const inputThree = refInputThree.current?.lastChild as HTMLElement;

@@ -8,12 +8,7 @@ import Grid from "@mui/material/Grid";
 import $ from "jquery";
 import Portal from "./portal";
 
-const gridCss = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "flex-start",
-  alignItems: "center",
-};
+const gridCss = {display: "flex",flexDirection: "column", justifyContent: "flex-start",  alignItems: "center",};
 
 const Result = React.forwardRef<HTMLElement>((props, ref) => {
   const { text, language } = useContext(LanguageContext);
