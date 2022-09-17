@@ -1,13 +1,7 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useImperativeHandle,
-} from "react";
+import React, { useContext,  useEffect, useRef,  useImperativeHandle,} from "react";
 import LanguageContext from "../../../store/languageContext";
 import IThemeContext from "../../../store/themeContext";
 import ErrorField from "./errorField";
-import { focusImput } from "../../../customHook/focusImput";
 import IinfoContext from "../../../store/inputInfoContext";
 import { handleScroll } from "../../../customHook/handleScroll";
 import Cleave from "cleave.js/react";
@@ -27,21 +21,26 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
   const { setInfo } = useContext(IinfoContext);
-  const ref = useRef<HTMLDivElement>(null);
+  const refInputOne = useRef<HTMLDivElement>(null);
+  const refInputTwo = useRef<HTMLDivElement>(null);
+  const refInputThree = useRef<HTMLDivElement>(null);
+  const refInputFour = useRef<HTMLDivElement>(null);
+  const refInputFive = useRef<HTMLDivElement>(null);
+  const refInputSix = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const alertRef = useRef<any>(null);
 
   useImperativeHandle(inputRef, () => {
     return {
       focusInput: () => {
-        const input = ref.current?.lastChild as HTMLElement;
+        const input = refInputOne.current?.lastChild as HTMLElement;
         input !== null && input.focus();
       },
     };
   });
 
-  const { control, reset, register,handleSubmit,formState: { errors },} = useForm<FormInputs>({ criteriaMode: "all" });
-  
+  const {control, reset, register,handleSubmit,formState: { errors },} = useForm<FormInputs>({ criteriaMode: "all" ,shouldFocusError:false});
+     
   const onSubmit = (data: FormInputs) => {
     const valOne =
       data.principal !== undefined &&
@@ -64,13 +63,9 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
 
 
     setInfo({ principal: valOne, profitRate: valTwo,  taxRateBSMV: valThree,  taxRateKKDF: valFour,numberOfIns: valFive,  insInterval: valSix,});
-        
     alertRef.current.openAlert();
-
     resultRef.current !== null && $(resultRef.current).addClass(   "animate__animated animate__fadeInUp  animate__delay-1s");
-            
     $(".h1,.div").css("display", "flex");
-
     handleScroll(resultRef);
     
   };
@@ -81,9 +76,33 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setTimeout(() => {  $(".h1,.div").css("display", "none");}, 350);
   };
+  
 
   useEffect(() => {
+
     Object.keys(errors).length !== 0 && alertRef.current.openAlert();
+    
+    const inputOne = refInputOne.current?.lastChild as HTMLElement;
+    const inputTwo = refInputTwo.current?.lastChild as HTMLElement;
+    const inputThree = refInputThree.current?.lastChild as HTMLElement;
+    const inputFour = refInputFour.current?.lastChild as HTMLElement;
+    const inputFive = refInputFive.current?.lastChild as HTMLElement;
+    const inputSix = refInputSix.current?.lastChild as HTMLElement;
+    console.log(errors)
+    if(errors["principal"]) {
+      inputOne !== null && inputOne.focus();
+    }else if(errors["profitRate"]) {
+      inputTwo !== null && inputTwo.focus();
+    }else if (errors["taxeRateBSMV"]) {
+      inputThree !== null && inputThree.focus();
+    }else if (errors["taxeRateKKDF"]) {
+      inputFour !== null && inputFour.focus();
+    }else if (errors["numberOfIns"]) {
+      inputFive !== null && inputFive.focus();
+    }else if (errors["insInterval"]) {
+      inputSix !== null && inputSix.focus();
+    }
+            
   }, [click, errors]);
 
   return (
@@ -92,14 +111,11 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
         language={language}
         Itheme={Itheme}
         onSubmit={handleSubmit(onSubmit)}
+        onKeyPress={e => { if (e.key == "Enter") e.preventDefault();}}
       >
         <Grid
           container
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={{ justifyContent: "center", alignItems: "center",}}
           spacing={1}
         >
           <Grid item xs={12} md={4}>
@@ -108,15 +124,15 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input" ref={ref}>
+            <div className="input" ref={refInputOne}>
               <Controller
                 name="principal"
                 control={control}
                 render={({ field }) => (
                   <Cleave
                     {...field}
-                    value={input.principal}
-                    onChange={(e) => {
+                      value={input.principal}
+                      onChange={(e) => {
                       setInput({ ...input, principal: e.target.value });
                       field.onChange(e.target.value);
                     }}
@@ -137,7 +153,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                     message: text.home.errorField.principal.max,
                   },
                   minLength: {
-                    value: 6,
+                    value: 7,
                     message: text.home.errorField.principal.min,
                   },
                 }}
@@ -153,7 +169,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input">
+            <div className="input" ref={refInputTwo}>
               <Controller
                 name="profitRate"
                 control={control}
@@ -195,7 +211,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input">
+            <div className="input" ref={refInputThree}>
               <Controller
                 name="taxeRateBSMV"
                 control={control}
@@ -238,7 +254,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input">
+            <div className="input" ref={refInputFour}>
               <Controller
                 name="taxeRateKKDF"
                 control={control}
@@ -281,14 +297,14 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="select">
+            <div className="select"  ref={refInputFive}>
               <select
                 {...register("numberOfIns", {
                   required: text.home.errorField.required,
                 })}
               >
                 <option value=""> {text.home.numOfInsPlaceHolder} </option>
-                {Array(12)
+                {Array(16)
                   .fill("")
                   .map((item, idx) => (
                     <option key={idx} value={(idx + 1) * 3}>
@@ -308,7 +324,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="select">
+            <div className="select" ref={refInputSix}>
               <select
                 {...register("insInterval", {
                   required: text.home.errorField.required,

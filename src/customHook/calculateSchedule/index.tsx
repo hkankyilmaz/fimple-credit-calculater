@@ -14,9 +14,11 @@ export const CalculateSchedule = () => {
     typeof info.taxRateKKDF === "string"
   ) {
     
+    // installment amount and interest rate
     const profitRate = +info.profitRate * 0.01 * (1 + 0.01 * (+info.taxRateBSMV + +info.taxRateKKDF));
     const IinsAmount = (+info.principal * (profitRate * Math.pow(profitRate + 1, +info.numberOfIns))) /(Math.pow(profitRate + 1, +info.numberOfIns) - 1);
-            
+           
+    //first row of payment schedule
     const insNo = 1;
     const insAmount = IinsAmount;
     const profitAmount = +info.principal * 0.01 * +info.profitRate;
@@ -25,6 +27,7 @@ export const CalculateSchedule = () => {
     const Iprincipal = insAmount - profitAmount - kkdf - bsmv;
     const remainPrincipal = +info.principal - Iprincipal;
 
+    // defination for calculate other row
     const inputProfitRate = +info.profitRate;
     const inputOfkkdf = +info.taxRateKKDF;
     const inputOfbsmv = +info.taxRateBSMV;
@@ -36,6 +39,7 @@ export const CalculateSchedule = () => {
     ];
 
     
+    // calcculation others raw---(schedule)  from first row
     Array(+info.numberOfIns)
       .fill("")
       .map((item, idx) => {
@@ -61,12 +65,15 @@ export const CalculateSchedule = () => {
           bsmv,
         });
       });
+
+    //get ride of the last one because we defined firs raw on the top page
     infoSchedule.pop();
 
     return infoSchedule;
   }
 };
 
+    // calculate for first result screen
 export const calculatedValues = () => {
   const infoValues = CalculateSchedule();
   if (infoValues !== undefined) {
