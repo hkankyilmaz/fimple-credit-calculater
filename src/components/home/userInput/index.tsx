@@ -38,7 +38,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
       },
     };
   });
-
+  
   const {control, reset, register,handleSubmit,formState: { errors },} = useForm<FormInputs>({ criteriaMode: "all" ,shouldFocusError:false});
      
   const onSubmit = (data: FormInputs) => {

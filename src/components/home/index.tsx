@@ -22,7 +22,6 @@ function Home() {
 
   const handleClick = () => {
     inputRef.current.focusInput();
-
     handleScroll(inputForm);
   };
 
