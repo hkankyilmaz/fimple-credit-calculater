@@ -6,7 +6,7 @@ Calculate and see your payment schedule and total refund with the easy-to-use cr
 
 <br/>
 
-<img align="left" width=40 src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"/>
+<img width=40 src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"/>
 <img align="left" width=40 src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png"/>
 <img align="left" width=40 height=40 src="https://avatars.githubusercontent.com/u/53986236?s=200&v=4">
 <img align="left" width=40 height=40 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToyg3ay1ZtnbG_GfVckSe0B74r98EJC5jYBw&usqp=CAU" >
