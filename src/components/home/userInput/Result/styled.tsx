@@ -118,10 +118,15 @@ export const StyledH1 = styled(hOne)<IItheme>`
   font-size: ${(props) => props.theme.fontSizes.biggest};
   display: none;
   justify-content: center;
+  text-align:center ;
   align-items: center;
   margin-bottom: ${(props) => props.theme.gutters.small};
   color: ${(props) =>
     props.Itheme === "light"
       ? props.theme.colors.black
       : props.theme.colors.white};
+
+      @media(max-width:900px) {
+        font-size:30px ;
+      }
 `;
