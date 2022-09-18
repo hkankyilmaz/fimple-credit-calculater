@@ -11,7 +11,7 @@ Calculate and see your payment schedule and total refund with the easy-to-use cr
 <img align="left" width=40 height=40 src="https://avatars.githubusercontent.com/u/53986236?s=200&v=4">
 <img align="left" width=40 height=40 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToyg3ay1ZtnbG_GfVckSe0B74r98EJC5jYBw&usqp=CAU" >
 <img align="left" width=40 height=40 src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/jquery/jquery.png">
-<img align="left" width=40 height=40 src="https://www.styled-components.com/atom.png">
+<img  align="left" witdth=100 height=40 src="https://www.styled-components.com/atom.png">
 
 <br/>
 <br>
@@ -40,7 +40,7 @@ to(directory)--> node_modules > react script > webpack > webpack.config.js <br>
 
 <br>
 <br>
-<img src="https://media2.giphy.com/media/pd9ySaKOpSOFAV84QM/giphy.gif?cid=790b761137d51cae44e502c338bbb77320439ce3692ef6de&rid=giphy.gif&ct=g">
+<img width=750 src="https://media0.giphy.com/media/SYFeBjn3FPi1LK6lXw/giphy.gif?cid=790b7611d5f423c4cc03dfe428c3f9aeee8e17bc7b513eed&rid=giphy.gif&ct=g">
 <br>
 <br>
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
