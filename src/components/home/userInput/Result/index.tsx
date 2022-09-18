@@ -1,19 +1,14 @@
 import React, { useContext } from "react";
-import Grid from "@mui/material/Grid";
 import LanguageContext from "../../../../store/languageContext";
 import IThemeContext from "../../../../store/themeContext";
-import { StyledDiv, StyledH1 } from "./styled";
 import IinfoContext from "../../../../store/inputInfoContext";
 import { calculatedValues } from "../../../../customHook/calculateSchedule";
+import { StyledDiv, StyledH1 } from "./styled";
+import Grid from "@mui/material/Grid";
 import $ from "jquery";
 import Portal from "./portal";
 
-const gridCss = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "flex-start",
-  alignItems: "center",
-};
+const gridCss = {display: "flex",flexDirection: "column", justifyContent: "flex-start",  alignItems: "center",};
 
 const Result = React.forwardRef<HTMLElement>((props, ref) => {
   const { text, language } = useContext(LanguageContext);
@@ -23,12 +18,8 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
   const IcalculatedValues = calculatedValues();
 
   const handleClick = (param: string): void => {
-    if (param === "complete") {
-      $("#reset-btn").trigger("click");
-    }
-    if (param === "show") {
-      setOpen(true);
-    }
+    if (param === "complete") $("#reset-btn").trigger("click");
+    if (param === "show") setOpen(true);
   };
 
   return (
@@ -40,7 +31,6 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
             <h4>
               Kullanıcı Girdisi <hr />
             </h4>
-
             <div>
               <p className="frs-txt">
                 {text.home.principal} <span>:</span>
@@ -48,8 +38,8 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
               <p className="sc-txt">
                 {typeof info.principal === "string"
                   ? (+info.principal).toLocaleString()
-                  : null}{" "}
-                TL
+                  : null}
+                {""} TL
               </p>
             </div>
             <div>
@@ -57,21 +47,23 @@ const Result = React.forwardRef<HTMLElement>((props, ref) => {
                 {text.home.profitRate}
                 <span>:</span>
               </p>
-              <p className="sc-txt">%{info.profitRate}</p>
+              <p className="sc-txt">
+                %{""} {info.profitRate}
+              </p>
             </div>
             <div>
               <p className="frs-txt">
                 {text.home.taxRateBSMV}
                 <span>:</span>
               </p>
-              <p className="sc-txt">%{info.taxRateBSMV}</p>
+              <p className="sc-txt">% {info.taxRateBSMV}</p>
             </div>
             <div>
               <p className="frs-txt">
                 {text.home.taxRateKKDF}
                 <span>:</span>
               </p>
-              <p className="sc-txt">%{info.taxRateKKDF}</p>
+              <p className="sc-txt">% {info.taxRateKKDF}</p>
             </div>
             <div>
               <p className="frs-txt">

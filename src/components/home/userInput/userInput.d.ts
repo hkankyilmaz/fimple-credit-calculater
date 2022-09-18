@@ -1,8 +1,8 @@
 export interface FormInputs {
-  principal?: number;
-  numOfIns?: number;
-  taxeRateBSMV?: number;
-  taxeRateKKDF?: number;
-  profitRate?: number;
+  principal?: string;
+  numberOfIns?: string;
+  taxeRateBSMV?: string;
+  taxeRateKKDF?: string;
+  profitRate?: string;
   insInterval?: string;
 }

@@ -96,4 +96,14 @@ export const StyledForm = styled.form<IItheme>`
     position: relative;
     margin-right: ${(props) => props.theme.gutters.smallBig};
   }
+
+  @media (max-width: 900px) {
+    span {
+      position: absolute;
+      float: none;
+      padding-left: 10px;
+      margin-right: ${(props) => (props.language === "turkish" ? "0" : "0")};
+      font-weight: bold;
+    }
+  }
 `;

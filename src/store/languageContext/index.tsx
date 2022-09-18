@@ -85,12 +85,12 @@ export const LanguageProvider = ({ children }: IChildren) => {
         principal: {
           max:
             language === "turkish"
-              ? "En fazla 100000000000 Tl girebilirsiniz "
-              : "You can enter a maximum of 100000000000 TL",
+              ? "10,000,000 TL'nin altında bir değer girin "
+              : "Enter a value below 10,000,000 TL",
           min:
             language === "turkish"
-              ? "En ez 100 tl girebilirsiniz"
-              : "You can enter at least 100 TL",
+              ? "En ez 1,000 TL girebilirsiniz"
+              : "You can enter at least 1,000 TL",
           pattern:
             language === "turkish"
               ? "Bu alana sadece sayı girebilirsiniz"
@@ -107,8 +107,8 @@ export const LanguageProvider = ({ children }: IChildren) => {
               : "You can enter at least 1.1%",
           pattern:
             language === "turkish"
-              ? "Bu alana sadece sayı girebilirsiniz"
-              : "This input is number only",
+              ? "En fazla %30 girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
+              : "You can enter up to 30% (Sample format: 2.2, 2.33, 7)",
         },
         taxRateBSMV: {
           max:
@@ -121,8 +121,8 @@ export const LanguageProvider = ({ children }: IChildren) => {
               : "You can enter at least 1.1%",
           pattern:
             language === "turkish"
-              ? "Bu alana sadece sayı girebilirsiniz"
-              : "This input is number only",
+              ? "En fazla %30 girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
+              : "You can enter up to 30% (Sample format: 2.2, 2.33, 7)",
         },
         taxeRateKKDF: {
           max:
@@ -135,8 +135,8 @@ export const LanguageProvider = ({ children }: IChildren) => {
               : "You can enter at least 1.1%",
           pattern:
             language === "turkish"
-              ? "Bu alana sadece sayı girebilirsiniz"
-              : "This input is number only",
+              ? "En fazla %30 girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
+              : "You can enter up to 30% (Sample format: 2.2, 2.33, 7)",
         },
       },
       alert: {

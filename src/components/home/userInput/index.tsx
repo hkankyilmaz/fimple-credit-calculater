@@ -1,88 +1,110 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useImperativeHandle,
-} from "react";
-import $ from "jquery";
-import "animate.css";
+import React, { useContext,  useEffect, useRef,  useImperativeHandle,} from "react";
 import LanguageContext from "../../../store/languageContext";
 import IThemeContext from "../../../store/themeContext";
+import ErrorField from "./errorField";
+import IinfoContext from "../../../store/inputInfoContext";
+import { handleScroll } from "../../../customHook/handleScroll";
+import Cleave from "cleave.js/react";
 import AlertMessage from "./alert";
 import Grid from "@mui/material/Grid";
 import { StyledForm } from "./styled";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { FormInputs } from "./userInput";
-import ErrorField from "./errorField";
-import { focusImput } from "../../../customHook/focusImput";
-import IinfoContext from "../../../store/inputInfoContext";
 import Result from "./Result";
-import { handleScroll } from "../../../customHook/handleScroll";
+import $ from "jquery";
+import "animate.css";
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
+
+  const [input, setInput] = React.useState({   principal: "",  profitRate: "", kkdf: "", bsmv: "",});
   const [click, setClick] = React.useState(0);
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
-  const { info, setInfo } = useContext(IinfoContext);
-  const ref = useRef<HTMLDivElement>(null);
+  const { setInfo } = useContext(IinfoContext);
+  const refInputOne = useRef<HTMLDivElement>(null);
+  const refInputTwo = useRef<HTMLDivElement>(null);
+  const refInputThree = useRef<HTMLDivElement>(null);
+  const refInputFour = useRef<HTMLDivElement>(null);
+  const refInputFive = useRef<HTMLDivElement>(null);
+  const refInputSix = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const alertRef = useRef<any>(null);
 
   useImperativeHandle(inputRef, () => {
     return {
       focusInput: () => {
-        const input = ref.current?.lastChild as HTMLElement;
+        const input = refInputOne.current?.lastChild as HTMLElement;
         input !== null && input.focus();
       },
     };
   });
-
-  const {
-    reset,
-    register,
-    watch,
-    getValues,
-    setFocus,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormInputs>({ criteriaMode: "all" });
-  const watchFields = watch(["numOfIns", "insInterval"]);
-
+  
+  const {control, reset, register,handleSubmit,formState: { errors },} = useForm<FormInputs>({ criteriaMode: "all" ,shouldFocusError:false});
+     
   const onSubmit = (data: FormInputs) => {
-    setInfo({
-      principal: data.principal,
-      profitRate: data.profitRate,
-      taxRateBSMV: data.taxeRateBSMV,
-      taxRateKKDF: data.taxeRateKKDF,
-      numberOfIns: data.numOfIns,
-      insInterval: data.insInterval,
-    });
+    // return the original value from formatted 
+    // value by Cleaver for UX (TL,%) for calculate
+    const valOne =
+      data.principal !== undefined &&
+      data.principal.replace(/[TL,% ]/g, (m: string) => "");
+    const valTwo =
+      data.profitRate !== undefined &&
+      data.profitRate.replace(/[TL,% ]/g, (m: string) => "");
+    const valThree =
+      data.taxeRateBSMV !== undefined &&
+      data.taxeRateBSMV.replace(/[TL,% ]/g, (m: string) => "");
+    const valFour =
+      data.taxeRateKKDF !== undefined &&
+      data.taxeRateKKDF.replace(/[TL,% ]/g, (m: string) => "");
+    const valFive =
+      data.numberOfIns !== undefined &&
+      data.numberOfIns.replace(/[TL,% ]/g, (m: string) => "");
+    const valSix =
+      data.insInterval !== undefined &&
+      data.insInterval.replace(/[TL,% ]/g, (m: string) => "");
 
+    setInfo({ principal: valOne, profitRate: valTwo,  taxRateBSMV: valThree,  taxRateKKDF: valFour,numberOfIns: valFive,  insInterval: valSix,});
     alertRef.current.openAlert();
-
-    resultRef.current !== null &&
-      $(resultRef.current).addClass(
-        "animate__animated animate__fadeInUp  animate__delay-1s"
-      );
+    resultRef.current !== null && $(resultRef.current).addClass(   "animate__animated animate__fadeInUp  animate__delay-1s");
     $(".h1,.div").css("display", "flex");
-
     handleScroll(resultRef);
+    
   };
 
   const IhandleClick = (): void => {
     reset();
+    setInput({ principal: "", profitRate: "", kkdf: "", bsmv: "" });
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => {
-      $(".h1,.div").css("display", "none");
-    }, 1000);
+    setTimeout(() => {  $(".h1,.div").css("display", "none");}, 350);
   };
+  
 
   useEffect(() => {
-    focusImput(getValues(), setFocus);
-  }, [watchFields]);
 
-  useEffect(() => {
     Object.keys(errors).length !== 0 && alertRef.current.openAlert();
+    
+    // focuses on not valid input
+    const inputOne = refInputOne.current?.lastChild as HTMLElement;
+    const inputTwo = refInputTwo.current?.lastChild as HTMLElement;
+    const inputThree = refInputThree.current?.lastChild as HTMLElement;
+    const inputFour = refInputFour.current?.lastChild as HTMLElement;
+    const inputFive = refInputFive.current?.lastChild as HTMLElement;
+    const inputSix = refInputSix.current?.lastChild as HTMLElement;
+    console.log(errors)
+    if(errors["principal"]) {
+      inputOne !== null && inputOne.focus();
+    }else if(errors["profitRate"]) {
+      inputTwo !== null && inputTwo.focus();
+    }else if (errors["taxeRateBSMV"]) {
+      inputThree !== null && inputThree.focus();
+    }else if (errors["taxeRateKKDF"]) {
+      inputFour !== null && inputFour.focus();
+    }else if (errors["numberOfIns"]) {
+      inputFive !== null && inputFive.focus();
+    }else if (errors["insInterval"]) {
+      inputSix !== null && inputSix.focus();
+    }
+            
   }, [click, errors]);
 
   return (
@@ -91,15 +113,12 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
         language={language}
         Itheme={Itheme}
         onSubmit={handleSubmit(onSubmit)}
+        onKeyPress={e => { if (e.key == "Enter") e.preventDefault();}}
       >
         <Grid
           container
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          spacing={2}
+          style={{ justifyContent: "center", alignItems: "center",}}
+          spacing={1}
         >
           <Grid item xs={12} md={4}>
             <p>
@@ -107,27 +126,39 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input" ref={ref}>
-              <input
-                type="number"
-                step="any"
-                autoComplete="off"
-                placeholder={text.home.principalPlaceHolder}
-                {...register("principal", {
+            <div className="input" ref={refInputOne}>
+              <Controller
+                name="principal"
+                control={control}
+                render={({ field }) => (
+                  <Cleave
+                    {...field}
+                      value={input.principal}
+                      onChange={(e) => {
+                      setInput({ ...input, principal: e.target.value });
+                      field.onChange(e.target.value);
+                    }}
+                    autoComplete="off"
+                    placeholder={text.home.principalPlaceHolder}
+                    options={{
+                      numeral: true,
+                      prefix: " TL",
+                      tailPrefix: true,
+                      noImmediatePrefix: true,
+                    }}
+                  />
+                )}
+                rules={{
                   required: text.home.errorField.required,
-                  max: {
-                    value: 100000000000,
+                  maxLength: {
+                    value: 14,
                     message: text.home.errorField.principal.max,
                   },
-                  min: {
-                    value: 100,
+                  minLength: {
+                    value: 7,
                     message: text.home.errorField.principal.min,
                   },
-                  pattern: {
-                    value: /\d+/,
-                    message: text.home.errorField.principal.pattern,
-                  },
-                })}
+                }}
               />
             </div>
           </Grid>
@@ -140,27 +171,36 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input">
-              <input
-                type="number"
-                step="any"
-                autoComplete="off"
-                placeholder={text.home.profitRatePlaceHolder}
-                {...register("profitRate", {
+            <div className="input" ref={refInputTwo}>
+              <Controller
+                name="profitRate"
+                control={control}
+                render={({ field }) => (
+                  <Cleave
+                    {...field}
+                    value={input.profitRate}
+                    onChange={(e) => {
+                      setInput({ ...input, profitRate: e.target.value });
+                      field.onChange(e.target.value);
+                    }}
+                    autoComplete="off"
+                    placeholder={text.home.profitRatePlaceHolder}
+                    options={{
+                      numeral: true,
+                      numeralThousandsGroupStyle: "none",
+                      prefix: "% ",
+                      noImmediatePrefix: true,
+                    }}
+                  />
+                )}
+                rules={{
                   required: text.home.errorField.required,
-                  max: {
-                    value: 30,
-                    message: text.home.errorField.profitRate.max,
-                  },
-                  min: {
-                    value: 1.1,
-                    message: text.home.errorField.profitRate.min,
-                  },
                   pattern: {
-                    value: /\d+/,
+                    value:
+                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
                     message: text.home.errorField.profitRate.pattern,
                   },
-                })}
+                }}
               />
             </div>
           </Grid>
@@ -173,28 +213,38 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input">
-              <input
-                type="number"
-                step="any"
-                autoComplete="off"
-                placeholder={text.home.taxRateBSMVPlaceHolder}
-                {...register("taxeRateBSMV", {
+            <div className="input" ref={refInputThree}>
+              <Controller
+                name="taxeRateBSMV"
+                control={control}
+                render={({ field }) => (
+                  <Cleave
+                    {...field}
+                    value={input.kkdf}
+                    onChange={(e) => {
+                      setInput({ ...input, kkdf: e.target.value });
+                      field.onChange(e.target.value);
+                    }}
+                    autoComplete="off"
+                    placeholder={text.home.taxRateBSMVPlaceHolder}
+                    options={{
+                      numeral: true,
+                      numeralThousandsGroupStyle: "none",
+                      prefix: "% ",
+                      noImmediatePrefix: true,
+                      rawValueTrimPrefix: true,
+                    }}
+                  />
+                )}
+                rules={{
                   required: text.home.errorField.required,
-                  max: {
-                    value: 30,
-                    message: text.home.errorField.taxRateBSMV.max,
-                  },
-                  min: {
-                    value: 1.1,
-                    message: text.home.errorField.taxRateBSMV.min,
-                  },
                   pattern: {
-                    value: /\d+/,
+                    value:
+                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
                     message: text.home.errorField.taxRateBSMV.pattern,
                   },
-                })}
-              ></input>
+                }}
+              />
             </div>
           </Grid>
           <Grid item container xs={12}>
@@ -206,28 +256,38 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="input">
-              <input
-                type="number"
-                step="any"
-                autoComplete="off"
-                placeholder={text.home.taxRateKKDFPlaceHolder}
-                {...register("taxeRateKKDF", {
+            <div className="input" ref={refInputFour}>
+              <Controller
+                name="taxeRateKKDF"
+                control={control}
+                render={({ field }) => (
+                  <Cleave
+                    {...field}
+                    value={input.bsmv}
+                    onChange={(e) => {
+                      setInput({ ...input, bsmv: e.target.value });
+                      field.onChange(e.target.value);
+                    }}
+                    autoComplete="off"
+                    placeholder={text.home.taxRateKKDFPlaceHolder}
+                    options={{
+                      numeral: true,
+                      numeralThousandsGroupStyle: "none",
+                      prefix: "% ",
+                      noImmediatePrefix: true,
+                      rawValueTrimPrefix: true,
+                    }}
+                  />
+                )}
+                rules={{
                   required: text.home.errorField.required,
-                  max: {
-                    value: 30,
-                    message: text.home.errorField.taxeRateKKDF.max,
-                  },
-                  min: {
-                    value: 1.1,
-                    message: text.home.errorField.taxeRateKKDF.min,
-                  },
                   pattern: {
-                    value: /\d+/,
-                    message: text.home.errorField.taxeRateKKDF.pattern,
+                    value:
+                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
+                    message: text.home.errorField.taxRateBSMV.pattern,
                   },
-                })}
-              ></input>
+                }}
+              />
             </div>
           </Grid>
           <Grid item container xs={12}>
@@ -239,14 +299,14 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="select">
+            <div className="select"  ref={refInputFive}>
               <select
-                {...register("numOfIns", {
+                {...register("numberOfIns", {
                   required: text.home.errorField.required,
                 })}
               >
                 <option value=""> {text.home.numOfInsPlaceHolder} </option>
-                {Array(12)
+                {Array(16)
                   .fill("")
                   .map((item, idx) => (
                     <option key={idx} value={(idx + 1) * 3}>
@@ -257,7 +317,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </div>
           </Grid>
           <Grid container item xs={12}>
-            <ErrorField message={errors?.numOfIns?.message || null} />
+            <ErrorField message={errors?.numberOfIns?.message || null} />
           </Grid>
 
           <Grid item xs={12} md={4}>
@@ -266,7 +326,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="select">
+            <div className="select" ref={refInputSix}>
               <select
                 {...register("insInterval", {
                   required: text.home.errorField.required,
