@@ -17,10 +17,10 @@ npm install
 npm start
 ```
 
-### Install Dependencies
+### to Build for Production
 
 ```
-npm install
+npm build
 ```
 🔸 Add pollyfill : <br>
 to(directory)--> node_modules > react script > webpack > webpack.config.js <br>
