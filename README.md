@@ -2,6 +2,7 @@
 
 🔸 Calculate and see your payment schedule and total refund with the easy-to-use credit calculater. <br>
 🔸 This web app built with using [React](https://reactjs.org/).
+🔸 Click and see live demo... [Here](https://credit-calculater-crs.vercel.app/).
 
 ## 💻 Setup <br>
 
