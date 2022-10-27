@@ -1,4 +1,9 @@
-import React, { useContext,  useEffect, useRef,  useImperativeHandle,} from "react";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+} from "react";
 import LanguageContext from "../../../store/languageContext";
 import IThemeContext from "../../../store/themeContext";
 import ErrorField from "./errorField";
@@ -15,8 +20,12 @@ import $ from "jquery";
 import "animate.css";
 
 const UserInput = React.forwardRef<any>((props, inputRef) => {
-
-  const [input, setInput] = React.useState({   principal: "",  profitRate: "", kkdf: "", bsmv: "",});
+  const [input, setInput] = React.useState({
+    principal: "",
+    profitRate: "",
+    kkdf: "",
+    bsmv: "",
+  });
   const [click, setClick] = React.useState(0);
   const { text, language } = useContext(LanguageContext);
   const { Itheme } = useContext(IThemeContext);
@@ -38,11 +47,17 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
       },
     };
   });
-  
-  const {control, reset, register,handleSubmit,formState: { errors },} = useForm<FormInputs>({ criteriaMode: "all" ,shouldFocusError:false});
-     
+
+  const {
+    control,
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>({ criteriaMode: "all", shouldFocusError: false });
+
   const onSubmit = (data: FormInputs) => {
-    // return the original value from formatted 
+    // return the original value from formatted
     // value by Cleaver for UX (TL,%) for calculate
     const valOne =
       data.principal !== undefined &&
@@ -63,26 +78,35 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
       data.insInterval !== undefined &&
       data.insInterval.replace(/[TL,% ]/g, (m: string) => "");
 
-    setInfo({ principal: valOne, profitRate: valTwo,  taxRateBSMV: valThree,  taxRateKKDF: valFour,numberOfIns: valFive,  insInterval: valSix,});
+    setInfo({
+      principal: valOne,
+      profitRate: valTwo,
+      taxRateBSMV: valThree,
+      taxRateKKDF: valFour,
+      numberOfIns: valFive,
+      insInterval: valSix,
+    });
     alertRef.current.openAlert();
-    resultRef.current !== null && $(resultRef.current).addClass(   "animate__animated animate__fadeInUp  animate__delay-1s");
+    resultRef.current !== null &&
+      $(resultRef.current).addClass(
+        "animate__animated animate__fadeInUp  animate__delay-1s"
+      );
     $(".h1,.div").css("display", "flex");
     handleScroll(resultRef);
-    
   };
 
   const IhandleClick = (): void => {
     reset();
     setInput({ principal: "", profitRate: "", kkdf: "", bsmv: "" });
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => {  $(".h1,.div").css("display", "none");}, 350);
+    setTimeout(() => {
+      $(".h1,.div").css("display", "none");
+    }, 350);
   };
-  
 
   useEffect(() => {
-
     Object.keys(errors).length !== 0 && alertRef.current.openAlert();
-    
+
     // focuses on not valid input
     const inputOne = refInputOne.current?.lastChild as HTMLElement;
     const inputTwo = refInputTwo.current?.lastChild as HTMLElement;
@@ -90,21 +114,20 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
     const inputFour = refInputFour.current?.lastChild as HTMLElement;
     const inputFive = refInputFive.current?.lastChild as HTMLElement;
     const inputSix = refInputSix.current?.lastChild as HTMLElement;
-    console.log(errors)
-    if(errors["principal"]) {
+    console.log(errors);
+    if (errors["principal"]) {
       inputOne !== null && inputOne.focus();
-    }else if(errors["profitRate"]) {
+    } else if (errors["profitRate"]) {
       inputTwo !== null && inputTwo.focus();
-    }else if (errors["taxeRateBSMV"]) {
+    } else if (errors["taxeRateBSMV"]) {
       inputThree !== null && inputThree.focus();
-    }else if (errors["taxeRateKKDF"]) {
+    } else if (errors["taxeRateKKDF"]) {
       inputFour !== null && inputFour.focus();
-    }else if (errors["numberOfIns"]) {
+    } else if (errors["numberOfIns"]) {
       inputFive !== null && inputFive.focus();
-    }else if (errors["insInterval"]) {
+    } else if (errors["insInterval"]) {
       inputSix !== null && inputSix.focus();
     }
-            
   }, [click, errors]);
 
   return (
@@ -113,11 +136,13 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
         language={language}
         Itheme={Itheme}
         onSubmit={handleSubmit(onSubmit)}
-        onKeyPress={e => { if (e.key == "Enter") e.preventDefault();}}
+        onKeyPress={(e) => {
+          if (e.key == "Enter") e.preventDefault();
+        }}
       >
         <Grid
           container
-          style={{ justifyContent: "center", alignItems: "center",}}
+          style={{ justifyContent: "center", alignItems: "center" }}
           spacing={1}
         >
           <Grid item xs={12} md={4}>
@@ -133,8 +158,8 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                 render={({ field }) => (
                   <Cleave
                     {...field}
-                      value={input.principal}
-                      onChange={(e) => {
+                    value={input.principal}
+                    onChange={(e) => {
                       setInput({ ...input, principal: e.target.value });
                       field.onChange(e.target.value);
                     }}
@@ -197,7 +222,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                   required: text.home.errorField.required,
                   pattern: {
                     value:
-                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
+                      /^% (?:[1-2][0-9]|[1-9]|30?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
                     message: text.home.errorField.profitRate.pattern,
                   },
                 }}
@@ -240,7 +265,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                   required: text.home.errorField.required,
                   pattern: {
                     value:
-                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
+                      /^% (?:[1-2][0-9]|[1-9]|30?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
                     message: text.home.errorField.taxRateBSMV.pattern,
                   },
                 }}
@@ -283,7 +308,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                   required: text.home.errorField.required,
                   pattern: {
                     value:
-                      /^% (?:[1-3][0-9]?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
+                      /^% (?:[1-2][0-9]|[1-9]|30?(?:\.[0-9]{1,2})?|% 30(?:\.00)?)$/g,
                     message: text.home.errorField.taxRateBSMV.pattern,
                   },
                 }}
@@ -299,7 +324,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
             </p>
           </Grid>
           <Grid item xs={12} md={8}>
-            <div className="select"  ref={refInputFive}>
+            <div className="select" ref={refInputFive}>
               <select
                 {...register("numberOfIns", {
                   required: text.home.errorField.required,
