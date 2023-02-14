@@ -222,7 +222,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                   required: text.home.errorField.required,
                   pattern: {
                     value:
-                      /^% (?:[0-2][0-9]|[1-9]|30?(?:\.[0-9]{1,2})?|% 30|0.[0-9][0-9](?:\.00)?)$/g,
+                      /^% (?:[1-2][0-9]|[1-9]|30?(?:\.[0-9]{1,{1,3}2})?|% 30|0.[1-9]?[1-9])$/g,
                     message: text.home.errorField.profitRate.pattern,
                   },
                 }}
@@ -265,7 +265,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                   required: text.home.errorField.required,
                   pattern: {
                     value:
-                      /^% (?:[0-2][0-9]|[1-9]|30?(?:\.[0-9]{1,2})?|% 30|0.[0-9][0-9](?:\.00)?)$/g,
+                      /^% (?:[1-2][0-9]|[1-9]|30?(?:\.[0-9]{1,{1,3}2})?|% 30|0.[1-9]?[1-9])$/g,
                     message: text.home.errorField.taxRateBSMV.pattern,
                   },
                 }}
@@ -308,7 +308,7 @@ const UserInput = React.forwardRef<any>((props, inputRef) => {
                   required: text.home.errorField.required,
                   pattern: {
                     value:
-                      /^% (?:[0-2][0-9]|[1-9]|30?(?:\.[0-9]{1,2})?|% 30|0.[0-9][0-9](?:\.00)?)$/g,
+                      /^% (?:[1-2][0-9]|[1-9]|30?(?:\.[0-9]{1,{1,3}2})?|% 30|0.[1-9]?[1-9])$/g,
                     message: text.home.errorField.taxRateBSMV.pattern,
                   },
                 }}
