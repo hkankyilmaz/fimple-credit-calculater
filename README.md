@@ -2,7 +2,7 @@
 
 🔸 Calculate and see your payment schedule and total refund with the easy-to-use credit calculater. <br>
 🔸 This web app built with using [React](https://reactjs.org/).<br>
-🔸 Click and see live demo... [Here](https://fimple-credit-calculater-nqq4hydb9-hkankyilmazz-gmailcom.vercel.app/).
+🔸 Click and see live demo... [Here](https://fimple-credit-calculater.vercel.app/).
 
 ## 💻 Setup <br>
 
