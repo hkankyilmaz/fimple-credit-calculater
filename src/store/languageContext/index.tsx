@@ -107,8 +107,8 @@ export const LanguageProvider = ({ children }: IChildren) => {
               : "You can enter at least 1.1%",
           pattern:
             language === "turkish"
-              ? "En fazla %30 girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
-              : "You can enter up to 30% (Sample format: 2.2, 2.33, 7)",
+              ? "%30 altında bir değer girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
+              : "You can enter a value below 30% (Sample format: 2.2, 2.33, 7)",
         },
         taxRateBSMV: {
           max:
@@ -121,8 +121,8 @@ export const LanguageProvider = ({ children }: IChildren) => {
               : "You can enter at least 1.1%",
           pattern:
             language === "turkish"
-              ? "En fazla %30 girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
-              : "You can enter up to 30% (Sample format: 2.2, 2.33, 7)",
+              ? "%30 altında bir değer girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
+              : "You can enter a value below 30% (Sample format: 2.2, 2.33, 7)",
         },
         taxeRateKKDF: {
           max:
@@ -135,8 +135,8 @@ export const LanguageProvider = ({ children }: IChildren) => {
               : "You can enter at least 1.1%",
           pattern:
             language === "turkish"
-              ? "En fazla %30 girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
-              : "You can enter up to 30% (Sample format: 2.2, 2.33, 7)",
+              ? "%30 altında bir değer girebilirsiniz (Örnek format: 2.2, 2.33 ,7)"
+              : "You can enter a value below 30% (Sample format: 2.2, 2.33, 7)",
         },
       },
       alert: {
